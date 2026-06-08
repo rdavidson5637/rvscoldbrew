@@ -1,113 +1,293 @@
 import Image from "next/image";
+import Link from "next/link";
+import MapEmbed from "@/components/MapEmbed";
+import {
+  IMAGES,
+  LOCATION,
+  OPENING_HOURS,
+  PRODUCT_COPY,
+  SPOTIFY_PLAYLIST_ID,
+} from "@/lib/brand";
+
+const featureCards = [
+  {
+    image: IMAGES.coldBrewCan,
+    label: "Customise",
+    title: "Build Your Can",
+    description:
+      "Pick your base, milk, and flavour — we seal it fresh into a can for counter pickup.",
+    href: "/builder",
+    cta: "Heck Yeah — Let's Build",
+    variant: "teal" as const,
+  },
+  {
+    image: IMAGES.coldBrewPour,
+    label: "Grab & Go",
+    title: "Shop the Fridge",
+    description:
+      "Cans, bundles, and concentrate — shipping and local pickup coming online soon.",
+    href: "/shop",
+    cta: "Shop the Fridge",
+    variant: "white" as const,
+  },
+  {
+    image: IMAGES.beans,
+    label: "Behind the Brew",
+    title: "Our Process",
+    description:
+      "24 hours cold-steeped for smoothness. See why cold brew beats the bitterness.",
+    href: "/process",
+    cta: "See the Process",
+    variant: "white" as const,
+  },
+];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <>
+      {/* Hero */}
+      <section className="relative flex min-h-[calc(100svh-7.75rem)] flex-col justify-center overflow-hidden bg-[#0c343d] text-[#fff2cc]">
+        <div
+          className="pointer-events-none absolute -left-24 top-1/4 h-64 w-64 rounded-full border border-[#fff2cc]/10 bg-[#fff2cc]/5 animate-float"
+          aria-hidden
         />
-      </div>
+        <div
+          className="pointer-events-none absolute -right-16 top-12 h-48 w-48 rounded-full bg-[#fff2cc]/5 animate-float delay-300"
+          aria-hidden
+        />
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
+          <div>
+            <p className="animate-fade-up text-xs font-semibold uppercase tracking-[0.2em] text-[#fff2cc]/80 sm:text-sm">
+              {LOCATION.name} · Belfast
+            </p>
+            <h1 className="mt-4 font-display text-5xl leading-[0.95] animate-fade-up delay-100 sm:text-6xl lg:text-7xl xl:text-8xl">
+              Smooth Craft Cold Brew &amp; Premium Matcha. Born in Belfast.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#fff2cc]/85 animate-fade-up delay-200 sm:text-lg">
+              Espresso-strength concentrate brewed in-house — the base for every
+              premium hot and cold drink we pour. Plus single cultivar Okumidori
+              matcha for a smooth, joyful lift.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4 animate-fade-up delay-300">
+              <Link href="/builder?quick=1" className="btn-cream normal-case">
+                Quick Order
+              </Link>
+              <Link href="/builder" className="btn border-2 border-[#fff2cc] bg-transparent text-[#fff2cc] hover:bg-[#fff2cc] hover:text-[#0c343d]">
+                Build Your Can
+              </Link>
+              <Link
+                href="/shop"
+                className="btn border-2 border-[#fff2cc]/60 bg-transparent text-[#fff2cc] hover:border-[#fff2cc] hover:bg-[#fff2cc]/10"
+              >
+                Shop the Fridge
+              </Link>
+            </div>
+          </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <div className="relative aspect-[4/5] animate-fade-up delay-200 overflow-hidden rounded-2xl shadow-2xl sm:aspect-[3/4] lg:aspect-[4/5]">
+            <Image
+              src={IMAGES.hero}
+              alt="Layered cold brew drink with rich concentrate and milk"
+              fill
+              className="animate-ken-burns object-cover"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c343d]/50 via-transparent to-[#0c343d]/10" />
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      {/* Feature cards */}
+      <section className="bg-[#fff2cc] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3 md:gap-8">
+          {featureCards.map((card) => (
+            <article
+              key={card.title}
+              className={`flex flex-col overflow-hidden rounded-2xl shadow-sm transition-transform duration-300 hover:-translate-y-1 ${
+                card.variant === "teal"
+                  ? "bg-[#0c343d] text-[#fff2cc]"
+                  : "bg-white text-[#141514]"
+              }`}
+            >
+              <div className="relative aspect-[16/10] w-full">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-8">
+                <p
+                  className={`text-xs font-semibold uppercase tracking-[0.15em] ${
+                    card.variant === "teal"
+                      ? "text-[#fff2cc]/70"
+                      : "text-[#0c343d]"
+                  }`}
+                >
+                  {card.label}
+                </p>
+                <h2 className="mt-2 font-display text-4xl leading-none">
+                  {card.title}
+                </h2>
+                <p
+                  className={`mt-4 flex-1 text-sm leading-relaxed ${
+                    card.variant === "teal"
+                      ? "text-[#fff2cc]/85"
+                      : "text-[#141514]/75"
+                  }`}
+                >
+                  {card.description}
+                </p>
+                <Link
+                  href={card.href}
+                  className={
+                    card.variant === "teal"
+                      ? "btn-cream mt-8 w-fit normal-case"
+                      : "btn-primary mt-8 w-fit normal-case"
+                  }
+                >
+                  {card.cta}
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+      {/* Caffeine strip */}
+      <section className="bg-[#141514] px-4 py-20 text-[#fff2cc] sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="font-display text-5xl leading-tight sm:text-6xl lg:text-7xl">
+            All The Caffeine. Zero Bitterness.
           </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <p className="mt-4 text-sm text-[#fff2cc]/70 sm:text-base">
+            {PRODUCT_COPY}
           </p>
-        </a>
-      </div>
-    </main>
+          <Link
+            href="/process"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#fff2cc] underline-offset-4 transition-opacity hover:opacity-80 hover:underline"
+          >
+            Heck yeah — show me how →
+          </Link>
+        </div>
+      </section>
+
+      {/* Matcha */}
+      <section className="bg-[#fff2cc] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0c343d]">
+              Premium Matcha
+            </p>
+            <h2 className="mt-3 font-display text-5xl leading-tight text-[#141514] sm:text-6xl">
+              Okumidori Matcha
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-[#141514]/80">
+              Single cultivar ceremonial matcha from Uji — vivid green, naturally
+              sweet, and clean enough to drink straight. Hot whisked lattes or iced
+              over our concentrate.
+            </p>
+            <Link
+              href="/shop"
+              className="btn-primary mt-8 inline-flex normal-case"
+            >
+              Heck Yeah — Try Matcha
+            </Link>
+          </div>
+          <div className="relative aspect-square overflow-hidden rounded-2xl shadow-lg sm:aspect-[4/3] lg:aspect-square">
+            <Image
+              src={IMAGES.matcha}
+              alt="Vibrant green matcha being whisked"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Store info + map + Spotify */}
+      <section className="bg-[#0c343d] px-4 py-20 text-[#fff2cc] sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+            <article className="rounded-2xl border border-[#fff2cc]/15 bg-[#fff2cc]/5 p-8 backdrop-blur-sm">
+              <span className="text-3xl" aria-hidden>
+                📍
+              </span>
+              <h3 className="mt-4 font-display text-3xl">Location</h3>
+              <div className="mt-4 space-y-1 text-sm leading-relaxed text-[#fff2cc]/85">
+                <p>{LOCATION.name}</p>
+                <p>{LOCATION.detail}</p>
+                <p>{LOCATION.city}</p>
+              </div>
+              <a
+                href={LOCATION.mapsDirectionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm font-semibold underline-offset-2 hover:underline"
+              >
+                Get directions →
+              </a>
+            </article>
+
+            <article className="rounded-2xl border border-[#fff2cc]/15 bg-[#fff2cc]/5 p-8 backdrop-blur-sm">
+              <span className="text-3xl" aria-hidden>
+                🕐
+              </span>
+              <h3 className="mt-4 font-display text-3xl">Opening Hours</h3>
+              <div className="mt-4 space-y-1 text-sm leading-relaxed text-[#fff2cc]/85">
+                {OPENING_HOURS.map((row) => (
+                  <p key={row.days}>
+                    {row.days} · {row.hours}
+                  </p>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <div className="mt-8">
+            <MapEmbed />
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-[#fff2cc]/15 bg-[#fff2cc]/5 p-6 sm:p-8">
+            <div className="mb-6 text-center sm:text-left">
+              <h3 className="font-display text-3xl">Shop Vibes</h3>
+              <p className="mt-2 text-sm text-[#fff2cc]/80">
+                Listen to the shop vibe right now — the same upbeat playlist
+                spinning in-store.
+              </p>
+            </div>
+            <iframe
+              title="RV's Cold Brew in-store Spotify playlist"
+              src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator&theme=0`}
+              width="100%"
+              height="352"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              className="rounded-xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="bg-[#fff2cc] px-4 py-20 text-center sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="font-display text-5xl leading-tight text-[#141514] sm:text-6xl lg:text-7xl">
+            Your Daily Upgrade Awaits.
+          </h2>
+          <Link
+            href="/builder?quick=1"
+            className="btn-primary mt-10 inline-flex normal-case"
+          >
+            Heck Yeah. Build My Drink.
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
