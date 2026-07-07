@@ -2,10 +2,10 @@ import Link from "next/link";
 import { LOCATION, OPENING_HOURS } from "@/lib/brand";
 
 const footerNav = [
+  { href: "/order", label: "Order Online" },
   { href: "/builder", label: "Build Your Can" },
   { href: "/shop", label: "Shop the Fridge" },
   { href: "/process", label: "Our Process" },
-  { href: "/shop", label: "Order Now" },
 ];
 
 export default function Footer() {
@@ -45,7 +45,7 @@ export default function Footer() {
             <h2 className="font-display text-xl tracking-wide">Visit</h2>
             <address className="mt-4 space-y-3 text-sm not-italic leading-relaxed text-cream/80">
               <p>
-                {LOCATION.name}
+                {LOCATION.unit}, {LOCATION.name}
                 <br />
                 {LOCATION.detail}
                 <br />

@@ -10,10 +10,15 @@ export default function JsonLd() {
     url: SITE_URL,
     address: {
       "@type": "PostalAddress",
-      streetAddress: LOCATION.name,
+      streetAddress: `${LOCATION.unit}, ${LOCATION.name}`,
       addressLocality: "Belfast",
       addressRegion: "Northern Ireland",
       addressCountry: "GB",
+    },
+    hasMenu: `${SITE_URL}/order`,
+    potentialAction: {
+      "@type": "OrderAction",
+      target: `${SITE_URL}/order`,
     },
     openingHoursSpecification: [
       {

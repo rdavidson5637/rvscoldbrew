@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   description:
     "Espresso-strength cold brew concentrate and Okumidori matcha. Born in Belfast — build your can or shop the fridge.",
-  icons: { icon: "/favicon.svg", apple: "/favicon.svg" },
+  icons: { icon: "/logo.png", apple: "/logo.png" },
   openGraph: {
     title: "RV's Cold Brew",
     description:

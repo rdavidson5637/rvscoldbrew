@@ -6,13 +6,30 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://rvscoldbrew.com";
 
 export const LOCATION = {
+  unit: "Unit 11",
   name: "Great Northern Mall",
   detail: "Near Grand Central Station",
   city: "Belfast, Northern Ireland",
-  full: "Great Northern Mall, Belfast — near Grand Central Station",
+  full: "Unit 11, Great Northern Mall, Belfast — near Grand Central Station",
   mapsQuery: "Great+Northern+Mall,+Belfast,+Northern+Ireland",
   mapsDirectionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast,+Northern+Ireland",
+} as const;
+
+/**
+ * Flipdish online ordering embed.
+ * TODO (owner/dev): from the Flipdish portal, generate the embed at
+ * https://flipdish.website/ and paste:
+ *  - APP_ID: your Flipdish App ID (looks like "fd12345")
+ *  - EMBED_SCRIPT: the exact <script> src the generator gives you
+ * Also: whitelist the site's hostname in the Flipdish portal and ensure the
+ * site is served over https, or the embed will not load.
+ */
+export const FLIPDISH = {
+  APP_ID: process.env.NEXT_PUBLIC_FLIPDISH_APP_ID ?? "",
+  EMBED_SCRIPT:
+    process.env.NEXT_PUBLIC_FLIPDISH_EMBED_SCRIPT ??
+    "https://d1nnvltbcfrgy2.cloudfront.net/webembed/embed.js",
 } as const;
 
 export const OPENING_HOURS = [

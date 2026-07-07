@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navLinks = [
+  { href: "/order", label: "Order Online" },
   { href: "/builder", label: "Build Your Can" },
   { href: "/shop", label: "Shop the Fridge" },
   { href: "/process", label: "Our Process" },
@@ -37,9 +39,20 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="font-display text-2xl tracking-wide text-cream transition-opacity hover:opacity-80 sm:text-3xl"
+          aria-label="RV's Cold Brew home"
+          className="flex items-center gap-3 transition-opacity hover:opacity-80"
         >
-          RV&apos;s Cold Brew
+          <Image
+            src="/logo.png"
+            alt="RV's Cold Brew"
+            width={48}
+            height={48}
+            priority
+            className="h-11 w-11 rounded-full object-cover sm:h-12 sm:w-12"
+          />
+          <span className="font-display text-2xl tracking-wide text-cream sm:text-3xl">
+            RV&apos;s Cold Brew
+          </span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
