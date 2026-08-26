@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Nunito } from "next/font/google";
+import { CartProvider } from "@/components/cart/CartProvider";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import SiteHeader from "@/components/SiteHeader";
@@ -24,21 +25,23 @@ export const metadata: Metadata = {
     template: "%s | RV's Cold Brew",
   },
   description:
-    "Espresso-strength cold brew concentrate and Okumidori matcha. Born in Belfast — build your can or shop the fridge.",
+    "CoreBrew Coffee Base and Okumidori matcha at Unit 11, Great Northern Mall, Belfast. Order for collection.",
   icons: { icon: "/logo.png", apple: "/logo.png" },
   openGraph: {
     title: "RV's Cold Brew",
     description:
-      "Smooth craft cold brew & premium matcha. Born in Belfast.",
+      "Smooth craft cold brew & premium matcha. Born in Belfast. Collection at Unit 11.",
     locale: "en_GB",
     type: "website",
     siteName: "RV's Cold Brew",
+    images: ["/media/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "RV's Cold Brew",
     description:
       "Smooth craft cold brew & premium matcha. Born in Belfast.",
+    images: ["/media/og-image.jpg"],
   },
   manifest: "/manifest.webmanifest",
 };
@@ -51,21 +54,23 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className={`${bebasNeue.variable} ${nunito.variable}`}>
       <body className={nunito.className}>
-        <JsonLd />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-[#0c343d] focus:px-4 focus:py-2 focus:text-[#fff2cc]"
-        >
-          Skip to content
-        </a>
-        <SiteHeader />
+        <CartProvider>
+          <JsonLd />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-[#0c343d] focus:px-4 focus:py-2 focus:text-[#fff2cc]"
+          >
+            Skip to content
+          </a>
+          <SiteHeader />
 
-        <div className="flex min-h-screen flex-col pt-[7.75rem]">
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </div>
+          <div className="flex min-h-screen flex-col pt-[7.75rem]">
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </CartProvider>
       </body>
     </html>
   );

@@ -16,22 +16,6 @@ export const LOCATION = {
     "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast,+Northern+Ireland",
 } as const;
 
-/**
- * Flipdish online ordering embed.
- * TODO (owner/dev): from the Flipdish portal, generate the embed at
- * https://flipdish.website/ and paste:
- *  - APP_ID: your Flipdish App ID (looks like "fd12345")
- *  - EMBED_SCRIPT: the exact <script> src the generator gives you
- * Also: whitelist the site's hostname in the Flipdish portal and ensure the
- * site is served over https, or the embed will not load.
- */
-export const FLIPDISH = {
-  APP_ID: process.env.NEXT_PUBLIC_FLIPDISH_APP_ID ?? "",
-  EMBED_SCRIPT:
-    process.env.NEXT_PUBLIC_FLIPDISH_EMBED_SCRIPT ??
-    "https://d1nnvltbcfrgy2.cloudfront.net/webembed/embed.js",
-} as const;
-
 export const OPENING_HOURS = [
   { days: "Mon–Fri", hours: "7:00 – 17:00" },
   { days: "Sat", hours: "8:00 – 14:00" },
@@ -39,30 +23,50 @@ export const OPENING_HOURS = [
 ] as const;
 
 export const BRAND_TAGLINE =
-  "Espresso-strength cold brew concentrate — powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
+  "Espresso-strength CoreBrew Coffee Base — powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
 
 export const PRODUCT_COPY =
   "All the caffeine, zero bitterness. 100% brewed in Belfast.";
 
 export const IMAGES = {
-  hero:
-    "https://images.unsplash.com/photo-1517701554-2fa99ff4b7f7?w=1200&q=85",
-  matcha:
-    "https://images.unsplash.com/photo-1536252843750-bf565563b72d?w=900&q=85",
-  coldBrewCan:
-    "https://images.unsplash.com/photo-1495474472287-4d47bcdddb65?w=600&q=80",
-  coldBrewPour:
-    "https://images.unsplash.com/photo-1517701554-2fa99ff4b7f7?w=600&q=80",
-  beans:
-    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80",
-  icedCoffee:
-    "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80",
-  concentrate:
-    "https://images.unsplash.com/photo-1514434755167-49f01a784db0?w=600&q=80",
-  processBlend:
-    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&q=80",
-  processSteep:
-    "https://images.unsplash.com/photo-1495474472287-4d47bcdddb65?w=400&q=80",
-  processCan:
-    "https://images.unsplash.com/photo-1517701554-2fa99ff4b7f7?w=400&q=80",
+  hero: "/media/coldbrew-milk-pour-poster.jpg",
+  matcha: "/media/matcha-whisk-poster.jpg",
+  cansFridge: "/media/cans-fridge.jpg",
+  concentratePour: "/media/coldbrew-concentrate-pour-poster.jpg",
+  matchaPour: "/media/matcha-pour-poster.jpg",
+  cityHall: "/media/coldbrew-city-hall-poster.jpg",
+  matchaStreet: "/media/matcha-belfast-street-poster.jpg",
+  og: "/media/og-image.jpg",
+  logo: "/logo.png",
+  processBlend: "/media/coldbrew-concentrate-pour-poster.jpg",
+  processSteep: "/media/coldbrew-milk-pour-poster.jpg",
+  processCan: "/media/cans-fridge.jpg",
+  placeholder: "/media/cans-fridge.jpg",
+} as const;
+
+export const VIDEOS = {
+  milkPour: {
+    src: "/media/coldbrew-milk-pour.mp4",
+    poster: "/media/coldbrew-milk-pour-poster.jpg",
+  },
+  concentratePour: {
+    src: "/media/coldbrew-concentrate-pour.mp4",
+    poster: "/media/coldbrew-concentrate-pour-poster.jpg",
+  },
+  cityHall: {
+    src: "/media/coldbrew-city-hall.mp4",
+    poster: "/media/coldbrew-city-hall-poster.jpg",
+  },
+  matchaPour: {
+    src: "/media/matcha-pour.mp4",
+    poster: "/media/matcha-pour-poster.jpg",
+  },
+  matchaWhisk: {
+    src: "/media/matcha-whisk.mp4",
+    poster: "/media/matcha-whisk-poster.jpg",
+  },
+  matchaStreet: {
+    src: "/media/matcha-belfast-street.mp4",
+    poster: "/media/matcha-belfast-street-poster.jpg",
+  },
 } as const;

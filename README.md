@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RV's Cold Brew
 
-## Getting Started
+Next.js 14 (App Router) site for the Belfast coffee kiosk at Unit 11, Great Northern Mall. Commerce, catalogue, checkout, and loyalty run through **Square**.
 
-First, run the development server:
+## Stack
+
+- Next.js 14 + TypeScript + Tailwind
+- Square Node SDK (`square`) — server-only
+- Vercel deployment
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
+# fill sandbox Square credentials
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Without Square env vars the app still builds and renders the menu from `src/lib/menu-data.ts` (prices show as “Price at till”; rewards show “launching soon”).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Dev health check (sandbox only): `GET /api/square/health`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Environment variables
 
-## Learn More
+| Variable | Where | Purpose |
+| --- | --- | --- |
+| `SQUARE_ACCESS_TOKEN` | server | Square API token |
+| `SQUARE_ENVIRONMENT` | server | `sandbox` or `production` |
+| `SQUARE_LOCATION_ID` | server | Unit 11 location |
+| `SQUARE_WEBHOOK_SIGNATURE_KEY` | server | Webhook HMAC key |
+| `NEXT_PUBLIC_SITE_URL` | public | Canonical site URL / checkout redirect |
+| `NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID` | public | Optional in-store playlist |
 
-To learn more about Next.js, take a look at the following resources:
+Never prefix Square secrets with `NEXT_PUBLIC_`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Ordering flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. `/menu` loads live catalogue via Catalog API (fallback: `menu-data.ts`).
+2. Cart is client-side (`rvs-cart` in localStorage).
+3. `POST /api/checkout` builds a Square order with **PICKUP** fulfillment and a Payment Link. Prices come from Square, never the client.
+4. Customer pays on Square Hosted Checkout; redirect to `/order/confirmed`.
+5. `payment.updated` webhook → `onOrderPaid` → loyalty point accumulation when an account is linked.
 
-## Deploy on Vercel
+## Loyalty
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Configured in the Square Seller Dashboard (not via API). Website joins / balance checks use phone number (E.164). In-store and online share one program.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+See `WEBHOOKS.md` and `CUTOVER.md` for go-live steps.

@@ -2,9 +2,10 @@ import Link from "next/link";
 import { LOCATION, OPENING_HOURS } from "@/lib/brand";
 
 const footerNav = [
-  { href: "/order", label: "Order Online" },
-  { href: "/builder", label: "Build Your Can" },
-  { href: "/shop", label: "Shop the Fridge" },
+  { href: "/menu", label: "Menu" },
+  { href: "/order", label: "Order" },
+  { href: "/rewards", label: "Rewards" },
+  { href: "/builder", label: "Find Your Drink" },
   { href: "/process", label: "Our Process" },
 ];
 
@@ -20,8 +21,8 @@ export default function Footer() {
               RV&apos;s Cold Brew
             </p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/80">
-              Espresso-strength cold brew concentrate and Okumidori matcha —
-              proudly independent, brewed in Belfast.
+              CoreBrew Coffee Base and Okumidori matcha — proudly independent,
+              brewed in Belfast. Collection only at Unit 11.
             </p>
           </div>
 

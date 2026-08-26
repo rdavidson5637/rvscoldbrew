@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Make Your Own Drink",
+  title: "Find Your Drink",
   description:
-    "Build your custom cold brew or Okumidori matcha drink. Pick your base, milk, flavour, and pickup time at Great Northern Mall, Belfast.",
+    "Hot or iced, coffee or matcha — find the matching drink on the RV's Cold Brew menu for collection at Unit 11.",
 };
 
 export default function BuilderLayout({

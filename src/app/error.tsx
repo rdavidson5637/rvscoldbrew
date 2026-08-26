@@ -15,22 +15,20 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center bg-[#fff2cc] px-4 py-20 text-center">
-      <h1 className="font-display text-5xl text-[#141514] sm:text-6xl">
-        Something Spilled
-      </h1>
-      <p className="mt-4 max-w-md text-sm text-[#141514]/70">
-        A quick hiccup on our end. Give it another go — your upgrade is still
-        waiting.
+    <main className="bg-[#fff2cc] px-4 py-24 text-center sm:px-6">
+      <h1 className="font-display text-5xl text-[#141514]">Something went wrong</h1>
+      <p className="mx-auto mt-4 max-w-md text-sm text-[#141514]/70">
+        Please try again. If ordering is down, pop into Unit 11 and we&apos;ll sort
+        you out.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-4">
         <button type="button" onClick={reset} className="btn-primary normal-case">
-          Try Again
+          Try again
         </button>
         <Link href="/" className="btn-outline normal-case">
-          Back Home
+          Home
         </Link>
       </div>
-    </div>
+    </main>
   );
 }

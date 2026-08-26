@@ -6,7 +6,7 @@ export default function JsonLd() {
     "@type": "CafeOrCoffeeShop",
     name: "RV's Cold Brew",
     description:
-      "Espresso-strength cold brew concentrate and Okumidori matcha. Born in Belfast.",
+      "CoreBrew Coffee Base and Okumidori matcha. Born in Belfast. Collection at Unit 11, Great Northern Mall.",
     url: SITE_URL,
     address: {
       "@type": "PostalAddress",
@@ -15,7 +15,7 @@ export default function JsonLd() {
       addressRegion: "Northern Ireland",
       addressCountry: "GB",
     },
-    hasMenu: `${SITE_URL}/order`,
+    hasMenu: `${SITE_URL}/menu`,
     potentialAction: {
       "@type": "OrderAction",
       target: `${SITE_URL}/order`,
@@ -36,7 +36,6 @@ export default function JsonLd() {
     ],
     servesCuisine: "Coffee",
     priceRange: "£",
-    sameAs: [],
   };
 
   return (

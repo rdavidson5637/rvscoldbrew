@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CartButton } from "@/components/cart/CartProvider";
 
 const navLinks = [
-  { href: "/order", label: "Order Online" },
-  { href: "/builder", label: "Build Your Can" },
-  { href: "/shop", label: "Shop the Fridge" },
+  { href: "/menu", label: "Menu" },
+  { href: "/order", label: "Order" },
+  { href: "/rewards", label: "Rewards" },
   { href: "/process", label: "Our Process" },
 ];
 
@@ -65,48 +66,27 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <Link href="/builder?quick=1" className="btn-cream normal-case">
-            Quick Order
+          <CartButton />
+          <Link href="/order" className="btn-cream normal-case">
+            Order for Collection
           </Link>
         </div>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-cream transition-colors hover:bg-white/10 md:hidden"
+          className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-md p-2 text-cream transition-colors hover:bg-white/10 md:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((open) => !open)}
         >
           {menuOpen ? (
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </button>
@@ -114,16 +94,16 @@ export default function Navbar() {
 
       <div
         id="mobile-nav"
-        className={`border-t border-cream/10 bg-[#141514] md:hidden ${
-          menuOpen ? "block" : "hidden"
+        className={`fixed inset-0 top-[7.75rem] z-40 flex flex-col bg-[#141514] transition-transform duration-300 md:hidden ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <ul className="flex flex-col px-4 py-4">
+        <ul className="flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-6">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`block py-3 text-base font-medium transition-opacity hover:opacity-80 ${
+                className={`flex min-h-12 items-center font-display text-4xl tracking-wide transition-opacity hover:opacity-80 ${
                   pathname === link.href ? "text-cream" : "text-cream/90"
                 }`}
               >
@@ -131,12 +111,12 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <li className="pt-2">
-            <Link href="/builder?quick=1" className="btn-cream w-full normal-case">
-              Quick Order
-            </Link>
-          </li>
         </ul>
+        <div className="border-t border-cream/10 p-4">
+          <Link href="/order" className="btn-cream w-full normal-case">
+            Order for Collection
+          </Link>
+        </div>
       </div>
     </nav>
   );

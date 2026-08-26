@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Our Process",
   description:
     "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+  openGraph: {
+    title: "Our Process | RV's Cold Brew",
+    images: ["/media/og-image.jpg"],
+  },
 };
 
 const TIMELINE_STEPS = [
@@ -29,10 +33,10 @@ const TIMELINE_STEPS = [
   {
     number: "03",
     image: IMAGES.processCan,
-    title: "The Can",
-    subtitle: "Infused, Sealed, Ready to Upgrade Your Day.",
+    title: "The Pour",
+    subtitle: "CoreBrew Coffee Base, Ready to Drink.",
     description:
-      "Infused to order, sealed fresh, and chilled — grab from the fridge or build your own.",
+      "Our CoreBrew Coffee Base powers every hot and iced coffee on the menu — smooth, never bitter.",
   },
 ];
 
@@ -53,7 +57,6 @@ const COLD_BREW_POINTS = [
 export default function ProcessPage() {
   return (
     <>
-      {/* Hero */}
       <section className="bg-[#0c343d] px-4 py-20 text-[#fff2cc] sm:px-6 lg:py-28">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="font-display text-6xl sm:text-7xl lg:text-8xl">
@@ -65,14 +68,12 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Timeline */}
       <section className="bg-[#fff2cc] px-4 py-20 sm:px-6 lg:py-28">
         <div className="relative mx-auto max-w-2xl">
           <div
             className="absolute bottom-8 left-7 top-8 w-px bg-[#0c343d]/20 sm:left-8"
             aria-hidden
           />
-
           <ol className="relative space-y-20">
             {TIMELINE_STEPS.map((step) => (
               <li key={step.number} className="relative flex gap-6 sm:gap-8">
@@ -108,23 +109,17 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Comparison */}
       <section className="bg-[#141514] px-4 py-20 text-[#fff2cc] sm:px-6 lg:py-28">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
           <article className="rounded-2xl border border-[#fff2cc]/10 bg-[#fff2cc]/5 p-8 opacity-60">
-            <h3 className="font-display text-3xl text-[#fff2cc]/70">
-              Hot Brew
-            </h3>
+            <h3 className="font-display text-3xl text-[#fff2cc]/70">Hot Brew</h3>
             <ul className="mt-6 space-y-3">
               {HOT_BREW_POINTS.map((point) => (
                 <li
                   key={point}
                   className="flex items-start gap-3 text-sm text-[#fff2cc]/60"
                 >
-                  <span
-                    className="mt-0.5 shrink-0 text-[#fff2cc]/40"
-                    aria-hidden
-                  >
+                  <span className="mt-0.5 shrink-0 text-[#fff2cc]/40" aria-hidden>
                     ✕
                   </span>
                   {point}
@@ -132,7 +127,6 @@ export default function ProcessPage() {
               ))}
             </ul>
           </article>
-
           <article className="rounded-2xl border-2 border-[#fff2cc]/30 bg-[#0c343d] p-8">
             <h3 className="font-display text-3xl">Cold Brew</h3>
             <ul className="mt-6 space-y-3">
@@ -141,10 +135,7 @@ export default function ProcessPage() {
                   key={point}
                   className="flex items-start gap-3 text-sm text-[#fff2cc]/90"
                 >
-                  <span
-                    className="mt-0.5 shrink-0 text-emerald-400"
-                    aria-hidden
-                  >
+                  <span className="mt-0.5 shrink-0 text-emerald-400" aria-hidden>
                     ✓
                   </span>
                   {point}
@@ -155,7 +146,6 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Matcha */}
       <section className="bg-[#0c343d] px-4 py-20 text-[#fff2cc] sm:px-6 lg:py-28">
         <div className="mx-auto max-w-2xl text-center">
           <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-[#fff2cc]/30">
@@ -175,31 +165,30 @@ export default function ProcessPage() {
             sweet, and every bit as smooth as our cold brew.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/builder" className="btn-cream normal-case">
-              Heck Yeah — Build My Drink
+            <Link href="/menu" className="btn-cream normal-case">
+              See the Menu
             </Link>
             <Link
-              href="/shop"
+              href="/order"
               className="btn border-2 border-[#fff2cc] bg-transparent text-[#fff2cc] hover:bg-[#fff2cc] hover:text-[#0c343d] normal-case"
             >
-              Shop the Fridge
+              Order for Collection
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
       <section className="bg-[#fff2cc] px-4 py-20 text-center sm:px-6 lg:py-28">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-display text-5xl text-[#141514] sm:text-6xl">
             Ready to Taste the Difference?
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/builder" className="btn-primary normal-case">
-              Heck Yeah — Build My Drink
+            <Link href="/order" className="btn-primary normal-case">
+              Order for Collection
             </Link>
-            <Link href="/shop" className="btn-outline normal-case">
-              Shop the Fridge
+            <Link href="/menu" className="btn-outline normal-case">
+              See the Menu
             </Link>
           </div>
         </div>
