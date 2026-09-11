@@ -9,7 +9,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/order" },
   openGraph: {
     title: "Order for Collection | RV's Cold Brew",
-    images: ["/media/og-image.jpg"],
+    description:
+      "Order RV's Cold Brew for collection at Unit 11, Great Northern Mall, Belfast — near Grand Central Station.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Order for Collection | RV's Cold Brew",
+    description:
+      "Order RV's Cold Brew for collection at Unit 11, Great Northern Mall, Belfast — near Grand Central Station.",
   },
 };
 

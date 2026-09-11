@@ -7,9 +7,19 @@ export const metadata: Metadata = {
   title: "Our Process",
   description:
     "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+  alternates: {
+    canonical: "/process",
+  },
   openGraph: {
     title: "Our Process | RV's Cold Brew",
-    images: ["/media/og-image.jpg"],
+    description:
+      "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Process | RV's Cold Brew",
+    description:
+      "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
   },
 };
 

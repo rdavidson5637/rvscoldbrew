@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "CoreBrew Coffee Base and Okumidori matcha at Unit 11, Great Northern Mall, Belfast. Order for collection.",
   icons: { icon: "/logo.png", apple: "/logo.png" },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "RV's Cold Brew",
     description:
@@ -34,14 +37,12 @@ export const metadata: Metadata = {
     locale: "en_GB",
     type: "website",
     siteName: "RV's Cold Brew",
-    images: ["/media/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "RV's Cold Brew",
     description:
       "Smooth craft cold brew & premium matcha. Born in Belfast.",
-    images: ["/media/og-image.jpg"],
   },
   manifest: "/manifest.webmanifest",
 };
