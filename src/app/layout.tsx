@@ -54,6 +54,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-GB" className={`${bebasNeue.variable} ${nunito.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://items-images-production.s3.us-west-2.amazonaws.com" />
+        <link rel="preconnect" href="https://square-cdn.com" />
+        <link rel="dns-prefetch" href="https://items-images-production.s3.us-west-2.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://square-cdn.com" />
+      </head>
       <body className={nunito.className}>
         <CartProvider>
           <JsonLd />

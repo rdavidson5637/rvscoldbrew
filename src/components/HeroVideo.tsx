@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 type HeroVideoProps = {
   src: string;
@@ -16,41 +13,28 @@ export default function HeroVideo({
   alt,
   className = "",
 }: HeroVideoProps) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  if (reducedMotion) {
-    return (
+  return (
+    <>
       <Image
         src={poster}
         alt={alt}
         fill
-        className={`object-cover ${className}`}
+        className={`object-cover motion-safe:hidden ${className}`}
         priority
         sizes="100vw"
       />
-    );
-  }
-
-  return (
-    <video
-      className={`absolute inset-0 h-full w-full object-cover ${className}`}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      poster={poster}
-      aria-label={alt}
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+      <video
+        className={`absolute inset-0 h-full w-full object-cover motion-reduce:hidden ${className}`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={poster}
+        aria-label={alt}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    </>
   );
 }
