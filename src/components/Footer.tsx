@@ -7,6 +7,7 @@ const footerNav = [
   { href: "/rewards", label: "Rewards" },
   { href: "/builder", label: "Find Your Drink" },
   { href: "/process", label: "Our Process" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Footer() {

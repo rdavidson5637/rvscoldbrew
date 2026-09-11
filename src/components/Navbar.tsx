@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/order", label: "Order" },
   { href: "/rewards", label: "Rewards" },
   { href: "/process", label: "Our Process" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
