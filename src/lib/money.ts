@@ -2,10 +2,6 @@ export function formatPrice(amount: number): string {
   return `£${amount.toFixed(2)}`;
 }
 
-export function formatGBP(amount: number): string {
-  return formatPrice(amount);
-}
-
 /** Square money amounts are bigint pence in GBP. */
 export function poundsToPence(n: number): bigint {
   return BigInt(Math.round(n * 100));

@@ -1,5 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
+import { SITE_URL } from "@/lib/brand";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { getSquareClient, getSquareLocationId, hasSquareCredentials } from "@/lib/square";
 
 type CheckoutBody = {
@@ -9,6 +11,13 @@ type CheckoutBody = {
 };
 
 export async function POST(request: Request) {
+  if (!rateLimit(getClientIp(request), 20, 60_000)) {
+    return NextResponse.json(
+      { error: "Too many checkout requests. Please wait a moment." },
+      { status: 429 }
+    );
+  }
+
   if (!hasSquareCredentials()) {
     return NextResponse.json(
       { error: "Ordering is temporarily unavailable. Please try again later." },
@@ -50,8 +59,6 @@ export async function POST(request: Request) {
     });
   }
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://rvscoldbrew.com";
   const locationId = getSquareLocationId();
   const noteParts = [
     body.pickupName ? `Pickup: ${body.pickupName}` : null,
@@ -82,7 +89,7 @@ export async function POST(request: Request) {
           : {}),
       },
       checkoutOptions: {
-        redirectUrl: `${siteUrl}/order/confirmed`,
+        redirectUrl: `${SITE_URL}/order/confirmed`,
         askForShippingAddress: false,
       },
     });
