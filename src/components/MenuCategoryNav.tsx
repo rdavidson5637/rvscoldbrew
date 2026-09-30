@@ -43,7 +43,7 @@ export default function MenuCategoryNav({
     <nav
       ref={navRef}
       aria-label="Menu categories"
-      className="sticky top-[7.75rem] z-30 border-b border-[#0c343d]/10 bg-[#fff2cc]/95 backdrop-blur-sm"
+      className="sticky top-[6.5rem] z-30 border-b border-[#0c343d]/10 bg-[#fff2cc]/95 backdrop-blur-sm sm:top-[6.75rem]"
     >
       <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 scrollbar-hide sm:px-6 lg:px-8">
         {categories.map((cat) => (

@@ -71,7 +71,7 @@ export default function RootLayout({
           </a>
           <SiteHeader />
 
-          <div className="flex min-h-screen flex-col pt-[7.75rem]">
+          <div className="flex min-h-screen flex-col pt-[6.5rem] sm:pt-[6.75rem]">
             <main id="main-content" className="flex-1">
               {children}
             </main>

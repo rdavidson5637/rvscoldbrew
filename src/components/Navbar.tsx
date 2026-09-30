@@ -68,8 +68,8 @@ export default function Navbar() {
             ))}
           </ul>
           <CartButton />
-          <Link href="/order" className="btn-cream normal-case">
-            Order for Collection
+          <Link href="/menu" className="btn-cream normal-case">
+            See the menu
           </Link>
         </div>
 
@@ -98,7 +98,7 @@ export default function Navbar() {
 
       <div
         id="mobile-nav"
-        className={`fixed inset-0 top-[7.75rem] z-40 flex flex-col bg-[#141514] transition-transform duration-300 md:hidden ${
+        className={`fixed inset-0 top-[6.5rem] z-40 flex flex-col bg-[#141514] transition-transform duration-300 sm:top-[6.75rem] md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -117,8 +117,8 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="border-t border-cream/10 p-4">
-          <Link href="/order" className="btn-cream w-full normal-case">
-            Order for Collection
+          <Link href="/menu" className="btn-cream w-full normal-case">
+            See the menu
           </Link>
         </div>
       </div>
