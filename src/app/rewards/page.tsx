@@ -9,9 +9,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/rewards" },
   openGraph: {
     title: "Rewards | RV's Cold Brew",
-    images: ["/media/og-image.jpg"],
+    description:
+      "Earn points with every cup at RV's Cold Brew — online and in-store, one balance.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rewards | RV's Cold Brew",
+    description:
+      "Earn points with every cup at RV's Cold Brew — online and in-store, one balance.",
   },
 };
+
+export const revalidate = 600;
 
 export default async function RewardsPage() {
   const program = await getProgram();

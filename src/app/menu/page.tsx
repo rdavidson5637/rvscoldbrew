@@ -15,7 +15,12 @@ export const metadata: Metadata = {
     title: "Menu | RV's Cold Brew",
     description:
       "Iced coffee, matcha, hot drinks, food and bakery — order for collection at Unit 11.",
-    images: ["/media/og-image.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Menu | RV's Cold Brew",
+    description:
+      "Iced coffee, matcha, hot drinks, food and bakery — order for collection at Unit 11.",
   },
 };
 

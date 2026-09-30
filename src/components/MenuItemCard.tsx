@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { useCart } from "@/components/cart/CartProvider";
+import AddToCartButton from "@/components/AddToCartButton";
 import { formatPrice } from "@/lib/money";
 import { IMAGES } from "@/lib/brand";
 
@@ -16,7 +14,6 @@ export type MenuItemCardData = {
 };
 
 export default function MenuItemCard({ item }: { item: MenuItemCardData }) {
-  const { addItem } = useCart();
   const price =
     item.priceGBP != null && Number.isFinite(item.priceGBP)
       ? formatPrice(item.priceGBP)
@@ -59,20 +56,11 @@ export default function MenuItemCard({ item }: { item: MenuItemCardData }) {
             )}
           </p>
           {canAdd && item.variationId && item.priceGBP != null && (
-            <button
-              type="button"
-              onClick={() =>
-                addItem({
-                  variationId: item.variationId!,
-                  name: item.name,
-                  priceGBP: item.priceGBP!,
-                  quantity: 1,
-                })
-              }
-              className="btn-primary shrink-0 px-4 py-2 text-xs normal-case"
-            >
-              Add to order
-            </button>
+            <AddToCartButton
+              variationId={item.variationId}
+              name={item.name}
+              priceGBP={item.priceGBP}
+            />
           )}
         </div>
       </div>

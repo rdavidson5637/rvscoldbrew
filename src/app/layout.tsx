@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "CoreBrew Coffee Base and Okumidori matcha at Unit 11, Great Northern Mall, Belfast. Order for collection.",
   icons: { icon: "/logo.png", apple: "/logo.png" },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "RV's Cold Brew",
     description:
@@ -34,14 +37,12 @@ export const metadata: Metadata = {
     locale: "en_GB",
     type: "website",
     siteName: "RV's Cold Brew",
-    images: ["/media/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "RV's Cold Brew",
     description:
       "Smooth craft cold brew & premium matcha. Born in Belfast.",
-    images: ["/media/og-image.jpg"],
   },
   manifest: "/manifest.webmanifest",
 };
@@ -53,6 +54,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-GB" className={`${bebasNeue.variable} ${nunito.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://items-images-production.s3.us-west-2.amazonaws.com" />
+        <link rel="preconnect" href="https://square-cdn.com" />
+        <link rel="dns-prefetch" href="https://items-images-production.s3.us-west-2.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://square-cdn.com" />
+      </head>
       <body className={nunito.className}>
         <CartProvider>
           <JsonLd />
@@ -64,7 +71,7 @@ export default function RootLayout({
           </a>
           <SiteHeader />
 
-          <div className="flex min-h-screen flex-col pt-[7.75rem]">
+          <div className="flex min-h-screen flex-col pt-[6.5rem] sm:pt-[6.75rem]">
             <main id="main-content" className="flex-1">
               {children}
             </main>

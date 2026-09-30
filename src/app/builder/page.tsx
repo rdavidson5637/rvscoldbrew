@@ -90,13 +90,18 @@ export default function BuilderPage() {
         <nav className="mt-10" aria-label="Finder progress">
           <ol className="flex items-center justify-center gap-2">
             {["Temp", "Base", "Flavour"].map((label, index) => (
-              <li key={label} className="flex items-center gap-2">
+              <li
+                key={label}
+                className="flex items-center gap-2"
+                aria-current={index === step ? "step" : undefined}
+              >
                 <span
                   className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
                     index <= step
                       ? "bg-[#0c343d] text-[#fff2cc]"
                       : "border-2 border-[#0c343d]/30 text-[#0c343d]/50"
                   }`}
+                  aria-label={`Step ${index + 1}: ${label}${index === step ? " (current)" : index < step ? " (completed)" : ""}`}
                 >
                   {index + 1}
                 </span>
@@ -122,6 +127,7 @@ export default function BuilderPage() {
                   <button
                     key={opt.id}
                     type="button"
+                    aria-pressed={temp === opt.id}
                     onClick={() => {
                       setTemp(opt.id);
                       setStep(1);
@@ -156,6 +162,7 @@ export default function BuilderPage() {
                   <button
                     key={opt.id}
                     type="button"
+                    aria-pressed={base === opt.id}
                     onClick={() => {
                       setBase(opt.id);
                       setStep(2);
@@ -193,6 +200,7 @@ export default function BuilderPage() {
                   <button
                     key={opt.id}
                     type="button"
+                    aria-pressed={flavour === opt.id}
                     onClick={() => setFlavour(opt.id)}
                     className={`rounded-2xl border-2 bg-white p-5 text-left shadow-sm transition-all ${
                       flavour === opt.id

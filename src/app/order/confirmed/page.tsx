@@ -1,18 +1,6 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
-
-function ClearCart() {
-  useEffect(() => {
-    try {
-      localStorage.removeItem("rvs-cart");
-    } catch {
-      /* ignore */
-    }
-  }, []);
-  return null;
-}
+import ClearCart from "@/components/ClearCart";
+import { LOCATION } from "@/lib/brand";
 
 export default function OrderConfirmedPage() {
   return (
@@ -23,8 +11,8 @@ export default function OrderConfirmedPage() {
           Order received.
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[#141514]/80">
-          We&apos;ll have it ready at Unit 11, Great Northern Mall. Your receipt
-          comes from Square by email.
+          We&apos;ll have it ready at {LOCATION.unit}, {LOCATION.name}. Your
+          receipt comes from Square by email.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link href="/menu" className="btn-primary normal-case">

@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/order", label: "Order" },
   { href: "/rewards", label: "Rewards" },
   { href: "/process", label: "Our Process" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -67,34 +68,37 @@ export default function Navbar() {
             ))}
           </ul>
           <CartButton />
-          <Link href="/order" className="btn-cream normal-case">
-            Order for Collection
+          <Link href="/menu" className="btn-cream normal-case">
+            See the menu
           </Link>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-md p-2 text-cream transition-colors hover:bg-white/10 md:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <CartButton />
+          <button
+            type="button"
+            className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-md p-2 text-cream transition-colors hover:bg-white/10"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? (
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       <div
         id="mobile-nav"
-        className={`fixed inset-0 top-[7.75rem] z-40 flex flex-col bg-[#141514] transition-transform duration-300 md:hidden ${
+        className={`fixed inset-0 top-[6.5rem] z-40 flex flex-col bg-[#141514] transition-transform duration-300 sm:top-[6.75rem] md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -113,8 +117,8 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="border-t border-cream/10 p-4">
-          <Link href="/order" className="btn-cream w-full normal-case">
-            Order for Collection
+          <Link href="/menu" className="btn-cream w-full normal-case">
+            See the menu
           </Link>
         </div>
       </div>

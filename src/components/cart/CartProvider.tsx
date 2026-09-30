@@ -317,6 +317,7 @@ function CartDrawer() {
                       type="button"
                       onClick={() => removeItem(item.variationId)}
                       className="ml-auto text-xs text-[#141514]/50 underline-offset-2 hover:underline"
+                      aria-label={`Remove ${item.name} from order`}
                     >
                       Remove
                     </button>

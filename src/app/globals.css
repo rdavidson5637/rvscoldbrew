@@ -58,7 +58,7 @@
 
   .btn-primary:hover {
     filter: brightness(1.1);
-    animation: pulse-soft 1.5s ease-in-out infinite;
+    transform: scale(1.02);
   }
 
   .btn-primary:focus-visible {
@@ -73,7 +73,7 @@
 
   .btn-cream:hover {
     filter: brightness(0.97);
-    animation: pulse-soft 1.5s ease-in-out infinite;
+    transform: scale(1.02);
   }
 
   .btn-cream:focus-visible {
@@ -195,6 +195,15 @@
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 

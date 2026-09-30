@@ -13,7 +13,9 @@ export default function MapEmbed() {
         className="block w-full border-0"
       />
       <div className="flex items-center justify-between gap-4 border-t border-[#fff2cc]/10 bg-[#fff2cc]/5 px-4 py-3">
-        <p className="text-xs text-[#fff2cc]/80">{LOCATION.full}</p>
+        <p className="text-xs text-[#fff2cc]/80">
+          {LOCATION.unit}, {LOCATION.name}, Belfast, near Grand Central Station
+        </p>
         <a
           href={LOCATION.mapsDirectionsUrl}
           target="_blank"

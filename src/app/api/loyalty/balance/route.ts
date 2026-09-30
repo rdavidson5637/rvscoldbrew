@@ -1,32 +1,11 @@
 import { NextResponse } from "next/server";
 import { findAccountByPhone, getBalance, getProgram } from "@/lib/loyalty";
 import { toE164UK } from "@/lib/phone";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { hasSquareCredentials } from "@/lib/square";
 
-const rateMap = new Map<string, { count: number; reset: number }>();
-
-function rateLimit(ip: string, limit = 10): boolean {
-  const now = Date.now();
-  const entry = rateMap.get(ip);
-  if (!entry || now > entry.reset) {
-    rateMap.set(ip, { count: 1, reset: now + 60_000 });
-    return true;
-  }
-  if (entry.count >= limit) return false;
-  entry.count += 1;
-  return true;
-}
-
-function clientIp(request: Request): string {
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    request.headers.get("x-real-ip") ||
-    "unknown"
-  );
-}
-
 export async function POST(request: Request) {
-  if (!rateLimit(clientIp(request))) {
+  if (!rateLimit(getClientIp(request))) {
     return NextResponse.json({ error: "Too many requests." }, { status: 429 });
   }
 

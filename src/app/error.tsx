@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="bg-[#fff2cc] px-4 py-24 text-center sm:px-6">
+    <main className="bg-[#fff2cc] px-4 py-24 text-center sm:px-6" role="alert">
       <h1 className="font-display text-5xl text-[#141514]">Something went wrong</h1>
       <p className="mx-auto mt-4 max-w-md text-sm text-[#141514]/70">
         Please try again. If ordering is down, pop into Unit 11 and we&apos;ll sort

@@ -33,6 +33,12 @@ export default function JsonLd() {
         opens: "08:00",
         closes: "14:00",
       },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        opens: "00:00",
+        closes: "00:00",
+      },
     ],
     servesCuisine: "Coffee",
     priceRange: "£",
