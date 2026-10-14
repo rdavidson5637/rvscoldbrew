@@ -9,8 +9,12 @@ const config: Config = {
     extend: {
       colors: {
         teal: "var(--teal)",
+        "teal-deep": "var(--teal-deep)",
         cream: "var(--cream)",
         black: "var(--black)",
+        ink: "var(--black)",
+        matcha: "var(--matcha)",
+        "matcha-ink": "var(--matcha-ink)",
       },
       fontFamily: {
         display: ["var(--font-display)", "Bebas Neue", "sans-serif"],

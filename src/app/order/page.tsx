@@ -1,93 +1,134 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import OpenStatus from "@/components/OpenStatus";
+import PageHeader from "@/components/PageHeader";
 import { LOCATION, OPENING_HOURS } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Order for Collection",
   description:
-    "Order RV's Cold Brew for collection at Unit 11, Great Northern Mall, Belfast — near Grand Central Station.",
+    "Order RV's Cold Brew online and collect at Unit 11, Great Northern Mall, Belfast, near Grand Central Station.",
   alternates: { canonical: "/order" },
   openGraph: {
     title: "Order for Collection | RV's Cold Brew",
     description:
-      "Order RV's Cold Brew for collection at Unit 11, Great Northern Mall, Belfast — near Grand Central Station.",
+      "Order RV's Cold Brew online and collect at Unit 11, Great Northern Mall, Belfast, near Grand Central Station.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Order for Collection | RV's Cold Brew",
     description:
-      "Order RV's Cold Brew for collection at Unit 11, Great Northern Mall, Belfast — near Grand Central Station.",
+      "Order RV's Cold Brew online and collect at Unit 11, Great Northern Mall, Belfast, near Grand Central Station.",
   },
 };
 
+const STEPS = [
+  {
+    title: "Pick your drinks",
+    body: "Add anything from the menu to your order. Prices come straight from our till.",
+  },
+  {
+    title: "Pay online",
+    body: "Checkout runs through Square. Your receipt lands in your inbox.",
+  },
+  {
+    title: "Collect at Unit 11",
+    body: "Head to our counter in Great Northern Mall and we'll have it ready.",
+  },
+];
+
 export default function OrderPage() {
   return (
-    <main className="bg-[#fff2cc] text-[#141514]">
-      <section className="bg-[#0c343d] px-4 py-16 text-[#fff2cc] sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="font-display text-5xl sm:text-6xl">
-            Order for Collection
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#fff2cc]/85 sm:text-base">
-            Browse the menu, pay online, and we&apos;ll have it ready at{" "}
-            {LOCATION.full}.
+    <div className="bg-cream text-ink">
+      <PageHeader
+        title="Order ahead"
+        intro={
+          <p>
+            Order online and collect at {LOCATION.full}. Collection only, no
+            delivery.
           </p>
-          <Link href="/menu" className="btn-cream mt-8 inline-flex normal-case">
-            See the Menu
+        }
+        actions={
+          <Link href="/menu" className="btn-cream">
+            Start your order
           </Link>
-        </div>
+        }
+      />
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+        <h2 className="font-display text-5xl leading-none text-teal sm:text-6xl">
+          How it works
+        </h2>
+        <ol className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+          {STEPS.map((step, i) => (
+            <li key={step.title} className="border-t-2 border-teal pt-6">
+              <p className="font-display text-5xl leading-none text-teal/35">{i + 1}</p>
+              <h3 className="mt-3 font-display text-4xl leading-none text-teal">
+                {step.title}
+              </h3>
+              <p className="mt-3 max-w-sm leading-relaxed text-ink/75">{step.body}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <div className="bg-[#141514] px-4 py-3 text-center text-sm text-[#fff2cc]/90 sm:px-6">
-        <Link href="/rewards" className="underline-offset-2 hover:underline">
-          Earn points with every order →
-        </Link>
-      </div>
-
-      <section className="px-4 py-14 sm:px-6 lg:py-20">
-        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-          <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <h2 className="font-display text-3xl text-[#0c343d]">Collect here</h2>
-            <p className="mt-4 text-sm leading-relaxed text-[#141514]/80">
+      <section className="bg-teal text-cream">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:py-24">
+          <div>
+            <h2 className="font-display text-5xl leading-none sm:text-6xl">Collect here</h2>
+            <address className="mt-6 text-xl not-italic leading-relaxed text-cream/85">
               {LOCATION.unit}, {LOCATION.name}
               <br />
               {LOCATION.detail}
               <br />
               {LOCATION.city}
-            </p>
+            </address>
             <a
               href={LOCATION.mapsDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block text-sm font-semibold text-[#0c343d] underline-offset-2 hover:underline"
+              className="link-under mt-6 inline-block text-cream"
             >
-              Get directions →
+              Get directions
             </a>
-          </article>
-          <article className="rounded-2xl bg-white p-8 shadow-sm">
-            <h2 className="font-display text-3xl text-[#0c343d]">Opening hours</h2>
-            <ul className="mt-4 space-y-1 text-sm text-[#141514]/80">
+          </div>
+          <div>
+            <h2 className="font-display text-5xl leading-none sm:text-6xl">Opening hours</h2>
+            <OpenStatus className="mt-4 font-extrabold text-cream" />
+            <dl className="mt-6 max-w-sm border-t-2 border-cream/40">
               {OPENING_HOURS.map((row) => (
-                <li key={row.days}>
-                  <span className="font-semibold text-[#141514]">{row.days}</span>{" "}
-                  {row.hours}
-                </li>
+                <div
+                  key={row.days}
+                  className="flex justify-between gap-6 border-b-2 border-dotted border-cream/20 py-3 text-lg"
+                >
+                  <dt className="font-extrabold">{row.days}</dt>
+                  <dd className="tabular-nums text-cream/80">{row.hours}</dd>
+                </div>
               ))}
-            </ul>
-          </article>
+            </dl>
+          </div>
         </div>
+      </section>
 
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl bg-[#0c343d] p-8 text-center text-[#fff2cc]">
-          <h2 className="font-display text-3xl">Not sure what to get?</h2>
-          <p className="mt-3 text-sm text-[#fff2cc]/80">
-            Hot or iced, coffee or matcha — we&apos;ll point you at the real menu
-            item.
-          </p>
-          <Link href="/builder" className="btn-cream mt-6 inline-flex normal-case">
-            Find Your Drink
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="flex flex-col items-start justify-between gap-8 rounded-[2rem] bg-matcha p-8 text-matcha-ink sm:p-12 md:flex-row md:items-center">
+          <div>
+            <h2 className="font-display text-5xl leading-none sm:text-6xl">
+              Not sure what to get?
+            </h2>
+            <p className="mt-3 max-w-md text-lg leading-relaxed">
+              Answer three quick questions, hot or iced, coffee or matcha, and a
+              flavour, and we&apos;ll point you at a drink.
+            </p>
+          </div>
+          <Link
+            href="/builder"
+            className="btn shrink-0 bg-matcha-ink text-matcha hover:bg-[#243a15] focus-visible:outline-matcha-ink"
+          >
+            Find your drink
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
