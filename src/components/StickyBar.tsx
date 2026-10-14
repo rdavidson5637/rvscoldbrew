@@ -1,12 +1,20 @@
 import { LOCATION } from "@/lib/brand";
+import OpenStatus from "./OpenStatus";
 
 export default function StickyBar() {
   return (
-    <div className="bg-teal text-cream">
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-2.5">
-        <span className="text-sm sm:text-base">
-          Collection at {LOCATION.unit} · {LOCATION.name}
-        </span>
+    <div className="h-10 bg-teal text-cream">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-4 text-[0.8rem] font-semibold sm:px-6 sm:text-sm">
+        <OpenStatus />
+        <a
+          href={LOCATION.mapsDirectionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="truncate text-cream/80 transition-colors hover:text-cream"
+        >
+          <span className="hidden sm:inline">Collect at </span>
+          {LOCATION.unit}, {LOCATION.name}
+        </a>
       </div>
     </div>
   );

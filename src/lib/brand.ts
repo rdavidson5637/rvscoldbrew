@@ -10,7 +10,7 @@ export const LOCATION = {
   name: "Great Northern Mall",
   detail: "Near Grand Central Station",
   city: "Belfast, Northern Ireland",
-  full: "Unit 11, Great Northern Mall, Belfast — near Grand Central Station",
+  full: "Unit 11, Great Northern Mall, Belfast, near Grand Central Station",
   mapsQuery: "Great+Northern+Mall,+Belfast,+Northern+Ireland",
   mapsDirectionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast,+Northern+Ireland",
@@ -22,8 +22,22 @@ export const OPENING_HOURS = [
   { days: "Sun", hours: "Closed" },
 ] as const;
 
+/**
+ * Machine-readable weekly hours (Europe/London), index 0 = Sunday.
+ * Minutes from midnight. Keep in sync with OPENING_HOURS and JsonLd.
+ */
+export const WEEKLY_HOURS: ReadonlyArray<{ open: number; close: number } | null> = [
+  null,
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 8 * 60, close: 14 * 60 },
+];
+
 export const BRAND_TAGLINE =
-  "Espresso-strength CoreBrew Coffee Base — powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
+  "Espresso-strength CoreBrew Coffee Base, powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
 
 export const PRODUCT_COPY =
   "All the caffeine, zero bitterness. 100% brewed in Belfast.";

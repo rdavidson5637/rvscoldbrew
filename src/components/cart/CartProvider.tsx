@@ -267,14 +267,14 @@ function CartDrawer() {
           {items.length === 0 ? (
             <div className="py-12 text-center">
               <p className="text-sm text-[#141514]/60">
-                Your order is empty — browse the menu.
+                Nothing in your order yet.
               </p>
               <Link
                 href="/menu"
                 onClick={() => setOpen(false)}
                 className="mt-4 inline-block text-sm font-semibold text-[#0c343d] hover:underline"
               >
-                See the Menu →
+                Browse the menu
               </Link>
             </div>
           ) : (
@@ -360,7 +360,7 @@ function CartDrawer() {
             {loading ? "Redirecting…" : "Pay & Collect"}
           </button>
           <p className="mt-3 text-center text-xs text-[#141514]/50">
-            Collection only at Unit 11, Great Northern Mall.
+            You pay on Square, then collect at Unit 11, Great Northern Mall.
           </p>
         </div>
       </aside>
@@ -368,19 +368,27 @@ function CartDrawer() {
   );
 }
 
-export function CartButton() {
+export function CartButton({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const { count, hydrated, setOpen } = useCart();
+  const shown = hydrated ? count : 0;
   return (
     <button
       type="button"
       onClick={() => setOpen(true)}
-      className="btn-cream relative shrink-0 normal-case"
-      aria-label={`Open order, ${hydrated ? count : 0} items`}
+      className={`relative inline-flex min-h-12 min-w-12 shrink-0 items-center justify-center rounded-full transition-colors ${
+        tone === "dark"
+          ? "text-cream hover:bg-white/10"
+          : "text-teal hover:bg-teal/10"
+      }`}
+      aria-label={`Your order, ${shown} item${shown === 1 ? "" : "s"}`}
     >
-      Order
-      {hydrated && count > 0 && (
-        <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#141514] text-xs font-bold text-[#fff2cc]">
-          {count}
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 8h12l-1 12H7L6 8z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 8V6a3 3 0 016 0v2" />
+      </svg>
+      {shown > 0 && (
+        <span className="absolute right-0.5 top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-cream px-1 text-[0.7rem] font-extrabold text-teal ring-2 ring-[#141514]">
+          {shown}
         </span>
       )}
     </button>

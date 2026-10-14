@@ -65,7 +65,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div 
-        className="rounded-2xl border-2 border-[#0c343d]/20 bg-white p-8 text-center sm:p-12"
+        className="rounded-[2rem] border-2 border-teal bg-white/70 p-8 text-center sm:p-12"
         role="status"
         aria-live="polite"
       >
@@ -86,17 +86,17 @@ export default function ContactForm() {
           </svg>
         </div>
         <h2 className="font-display text-4xl text-[#141514]">
-          Message Sent
+          Enquiry sent
         </h2>
         <p className="mt-4 text-[#141514]/75">
-          Thanks for reaching out! We&apos;ll be in touch within 48 hours.
+          Thanks. We&apos;ll get back to you within 48 hours.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="btn-primary mt-8 normal-case"
         >
-          Send Another Message
+          Send another
         </button>
       </div>
     );
@@ -105,15 +105,15 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-2xl border-2 border-[#0c343d]/10 bg-white p-8 shadow-sm sm:p-10"
+      className="space-y-6 rounded-[2rem] border-2 border-teal bg-white/70 p-6 sm:p-10"
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Full Name <span className="text-red-600">*</span>
+            Full name <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -121,7 +121,7 @@ export default function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
             placeholder="Your name"
           />
         </div>
@@ -129,9 +129,9 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Email Address <span className="text-red-600">*</span>
+            Email <span className="text-red-600">*</span>
           </label>
           <input
             type="email"
@@ -139,7 +139,7 @@ export default function ContactForm() {
             name="email"
             required
             autoComplete="email"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
             placeholder="you@example.com"
           />
         </div>
@@ -149,9 +149,9 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Phone Number{" "}
+            Phone{" "}
             <span className="font-normal text-[#141514]/50">
               (optional)
             </span>
@@ -161,7 +161,7 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             autoComplete="tel"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
             placeholder="+44 7XXX XXXXXX"
           />
         </div>
@@ -169,9 +169,9 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="company"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Company / Organisation{" "}
+            Company or organisation{" "}
             <span className="font-normal text-[#141514]/50">
               (optional)
             </span>
@@ -181,7 +181,7 @@ export default function ContactForm() {
             id="company"
             name="company"
             autoComplete="organization"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
             placeholder="Your company name"
           />
         </div>
@@ -190,15 +190,15 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="enquiry_type"
-          className="block text-sm font-medium text-[#141514]"
+          className="block text-sm font-extrabold text-teal"
         >
-          Enquiry Type <span className="text-red-600">*</span>
+          Enquiry type <span className="text-red-600">*</span>
         </label>
         <select
           id="enquiry_type"
           name="enquiry_type"
           required
-          className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+          className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
         >
           {enquiryTypes.map((type) => (
             <option key={type.value} value={type.value}>
@@ -211,7 +211,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-[#141514]"
+          className="block text-sm font-extrabold text-teal"
         >
           Message <span className="text-red-600">*</span>
         </label>
@@ -220,8 +220,8 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 block w-full resize-none rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
-          placeholder="Tell us about your enquiry..."
+          className="mt-2 block w-full resize-none rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+          placeholder="What do you need, and when?"
         />
       </div>
 
@@ -265,13 +265,12 @@ export default function ContactForm() {
             Sending...
           </span>
         ) : (
-          "Send Message"
+          "Send enquiry"
         )}
       </button>
 
       <p className="text-center text-xs text-[#141514]/50">
-        By submitting this form, you agree to our privacy policy. We
-        will only use your information to respond to your enquiry.
+        We only use your details to reply to this enquiry.
       </p>
     </form>
   );

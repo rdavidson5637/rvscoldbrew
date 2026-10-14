@@ -3,6 +3,7 @@ import { Bebas_Neue, Nunito } from "next/font/google";
 import { CartProvider } from "@/components/cart/CartProvider";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import SiteHeader from "@/components/SiteHeader";
 import { SITE_URL } from "@/lib/brand";
 import "./globals.css";
@@ -65,13 +66,14 @@ export default function RootLayout({
           <JsonLd />
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-[#0c343d] focus:px-4 focus:py-2 focus:text-[#fff2cc]"
+            className="sr-only focus:not-sr-only focus:fixed focus:font-bold focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-[#0c343d] focus:px-4 focus:py-2 focus:text-[#fff2cc]"
           >
             Skip to content
           </a>
           <SiteHeader />
+          <RevealOnScroll />
 
-          <div className="flex min-h-screen flex-col pt-[6.5rem] sm:pt-[6.75rem]">
+          <div className="flex min-h-screen flex-col pt-[var(--header-h)]">
             <main id="main-content" className="flex-1">
               {children}
             </main>

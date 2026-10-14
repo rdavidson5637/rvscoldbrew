@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MenuCategoryNav from "@/components/MenuCategoryNav";
-import MenuItemCard from "@/components/MenuItemCard";
+import MenuItemRow from "@/components/MenuItemRow";
+import PageHeader from "@/components/PageHeader";
+import AutoVideo from "@/components/AutoVideo";
+import Sticker from "@/components/Sticker";
+import { VIDEOS } from "@/lib/brand";
 import { getMenu } from "@/lib/catalog";
 
 export const revalidate = 300;
@@ -9,81 +13,156 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Menu",
   description:
-    "Browse the full RV's Cold Brew menu — iced coffee, matcha, hot drinks, food and bakery. Order for collection at Unit 11, Great Northern Mall, Belfast.",
+    "The full RV's Cold Brew menu: iced coffee, matcha, hot drinks, food and bakery. Order for collection at Unit 11, Great Northern Mall, Belfast.",
   alternates: { canonical: "/menu" },
   openGraph: {
     title: "Menu | RV's Cold Brew",
     description:
-      "Iced coffee, matcha, hot drinks, food and bakery — order for collection at Unit 11.",
+      "Iced coffee, matcha, hot drinks, food and bakery. Order for collection at Unit 11.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Menu | RV's Cold Brew",
     description:
-      "Iced coffee, matcha, hot drinks, food and bakery — order for collection at Unit 11.",
+      "Iced coffee, matcha, hot drinks, food and bakery. Order for collection at Unit 11.",
+  },
+};
+
+const isMatcha = (id: string) => id.includes("matcha");
+
+/** A real clip beside the bigger drink sections. Only where the footage actually shows that drink. */
+const CATEGORY_MEDIA: Record<string, { video: { src: string; poster: string }; label: string; tilt: string }> = {
+  "iced-coffee": {
+    video: VIDEOS.cityHall,
+    label: "An RV's iced cold brew held up at Belfast City Hall",
+    tilt: "[--tilt:4deg]",
+  },
+  "iced-matcha": {
+    video: VIDEOS.matchaStreet,
+    label: "An RV's iced matcha held up in Belfast city centre",
+    tilt: "[--tilt:-4deg]",
+  },
+  "hot-matcha": {
+    video: VIDEOS.matchaWhisk,
+    label: "Matcha being whisked by hand",
+    tilt: "[--tilt:3deg]",
   },
 };
 
 export default async function MenuPage() {
   const menu = await getMenu();
   const categories = menu.categories.map((c) => ({ id: c.id, name: c.name }));
+  // When Square isn't returning prices, say so once instead of on every line
+  const priced = menu.categories.some((c) =>
+    c.items.some((i) => i.priceGBP != null && Number.isFinite(i.priceGBP)),
+  );
 
   return (
     <>
-      <header className="bg-[#0c343d] px-4 py-12 text-[#fff2cc] sm:px-6 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl">
-            The Menu
-          </h1>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#fff2cc]/85 sm:text-base">
-            Built on CoreBrew Coffee Base and ceremonial Okumidori matcha.
-            Collection only at Unit 11, Great Northern Mall.
+      <PageHeader
+        title="The menu"
+        intro={
+          <p>
+            Built on CoreBrew Coffee Base and ceremonial Okumidori matcha.{" "}
+            {priced
+              ? "Add what you want, pay online, and collect at Unit 11."
+              : "Prices are at the till in Unit 11."}
           </p>
-          <Link
-            href="/order"
-            className="btn-cream mt-6 inline-flex normal-case"
-          >
-            Order for Collection
+        }
+        actions={
+          <Link href="/order" className="btn-ghost-cream">
+            How collection works
           </Link>
-        </div>
-      </header>
-
-      <div className="bg-[#141514] px-4 py-3 text-center text-sm text-[#fff2cc]/90 sm:px-6">
-        <Link href="/rewards" className="underline-offset-2 hover:underline">
-          Earn points with every order →
-        </Link>
-      </div>
+        }
+        aside={
+          <Sticker
+            ring="Order ahead • Pay online • Collect at Unit 11 • "
+            centre={["Unit", "11"]}
+            className="tilt w-40 [--tilt:-10deg] lg:w-48"
+          />
+        }
+      />
 
       <MenuCategoryNav categories={categories} />
 
-      <div className="bg-[#fff2cc] px-4 py-12 sm:px-6 lg:py-16">
-        <div className="mx-auto max-w-7xl space-y-16">
-          {menu.categories.map((category) => (
-            <section
-              key={category.id}
-              id={`category-${category.id}`}
-              className="scroll-mt-40"
-            >
-              <h2 className="font-display text-4xl text-[#141514] sm:text-5xl">
-                {category.name}
-              </h2>
-              {category.blurb && (
-                <p className="mt-2 max-w-xl text-sm text-[#141514]/70">
-                  {category.blurb}
-                </p>
-              )}
-              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {category.items.map((item) => (
-                  <MenuItemCard key={item.squareId} item={item} />
+      {menu.categories.map((category) => {
+        const matcha = isMatcha(category.id);
+        const media = CATEGORY_MEDIA[category.id];
+        const half = Math.ceil(category.items.length / 2);
+        const columns =
+          category.items.length > 4
+            ? [category.items.slice(0, half), category.items.slice(half)]
+            : [category.items];
+
+        return (
+          <section
+            key={category.id}
+            id={`category-${category.id}`}
+            className={`scroll-mt-[calc(var(--header-h)+4.5rem)] ${
+              matcha ? "bg-matcha text-matcha-ink" : "bg-cream text-teal"
+            }`}
+          >
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:py-20">
+              <div className="flex items-end justify-between gap-6" data-reveal>
+                <div className="min-w-0">
+                  <h2 className="font-display text-6xl leading-none sm:text-7xl">
+                    {category.name}
+                  </h2>
+                  {category.blurb && (
+                    <p className="mt-3 max-w-md text-base leading-relaxed opacity-75">
+                      {category.blurb}
+                    </p>
+                  )}
+                </div>
+                {media && (
+                  <div
+                    className={`tilt relative z-10 -mb-6 w-24 shrink-0 overflow-hidden rounded-[1.25rem] border-4 shadow-xl shadow-black/20 sm:w-28 lg:w-36 ${
+                      matcha ? "border-cream" : "border-teal"
+                    } ${media.tilt}`}
+                  >
+                    <div className="aspect-[4/5]">
+                      <AutoVideo
+                        src={media.video.src}
+                        poster={media.video.poster}
+                        label={media.label}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div
+                data-reveal
+                className={`mt-8 grid gap-x-16 ${columns.length > 1 ? "md:grid-cols-2" : "md:max-w-[calc(50%-2rem)]"}`}
+              >
+                {columns.map((col, i) => (
+                  <ul
+                    key={i}
+                    className={`divide-y-2 divide-dotted border-t-2 ${
+                      matcha
+                        ? "divide-matcha-ink/15 border-matcha-ink"
+                        : "divide-teal/15 border-teal"
+                    } ${i > 0 ? "max-md:border-t-0" : ""}`}
+                  >
+                    {col.map((item) => (
+                      <MenuItemRow key={item.squareId} item={item} />
+                    ))}
+                  </ul>
                 ))}
               </div>
-            </section>
-          ))}
-        </div>
+            </div>
+          </section>
+        );
+      })}
 
-        <p className="mx-auto mt-16 max-w-7xl text-center text-xs text-[#141514]/50">
-          Prices and availability come straight from our till.
+      <div className="bg-ink px-4 py-12 text-center text-cream sm:px-6">
+        <p className="font-display text-4xl leading-none">Every cup counts</p>
+        <p className="mx-auto mt-3 max-w-md text-cream/75">
+          Join RV&apos;s Rewards free with your mobile number. Points build up
+          online and at the till, on one balance.
         </p>
+        <Link href="/rewards" className="btn-cream mt-6">
+          Join rewards
+        </Link>
       </div>
     </>
   );
