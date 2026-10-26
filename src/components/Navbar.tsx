@@ -8,6 +8,7 @@ import { CartButton } from "@/components/cart/CartProvider";
 
 const navLinks = [
   { href: "/menu", label: "Menu" },
+  { href: "/on-tap", label: "On Tap" },
   { href: "/rewards", label: "Rewards" },
   { href: "/process", label: "Our Process" },
   { href: "/contact", label: "Contact" },

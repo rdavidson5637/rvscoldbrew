@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Nunito } from "next/font/google";
 import { CartProvider } from "@/components/cart/CartProvider";
+import EmailModal from "@/components/EmailModal";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -26,8 +27,14 @@ export const metadata: Metadata = {
     template: "%s | RV's Cold Brew",
   },
   description:
-    "CoreBrew Coffee Base and Okumidori matcha at Unit 11, Great Northern Mall, Belfast. Order for collection.",
-  icons: { icon: "/logo.png", apple: "/logo.png" },
+    "CoreBrew Coffee Base, nitro cold brew, and Okumidori matcha at Unit 11, Great Northern Mall, Belfast BT2 7GN. Order for collection or put cold brew on tap at your venue.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/logo.png" },
+    ],
+    apple: "/logo.png",
+  },
   alternates: {
     canonical: "/",
   },
@@ -72,6 +79,7 @@ export default function RootLayout({
           </a>
           <SiteHeader />
           <RevealOnScroll />
+          <EmailModal />
 
           <div className="flex min-h-screen flex-col pt-[var(--header-h)]">
             <main id="main-content" className="flex-1">

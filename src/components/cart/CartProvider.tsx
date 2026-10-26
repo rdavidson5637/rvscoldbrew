@@ -32,6 +32,7 @@ type CartContextValue = {
 };
 
 const CART_STORAGE_KEY = "rvs-cart";
+const GUEST_STORAGE_KEY = "rvs-guest";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
@@ -163,7 +164,38 @@ function CartDrawer() {
   } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pickupName, setPickupName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
   const asideRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(GUEST_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as {
+          pickupName?: string;
+          phone?: string;
+        };
+        if (parsed.pickupName) setPickupName(parsed.pickupName);
+        if (parsed.phone) setPhone(parsed.phone);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(
+        GUEST_STORAGE_KEY,
+        JSON.stringify({ pickupName, phone }),
+      );
+    } catch {
+      /* ignore */
+    }
+  }, [pickupName, phone, hydrated]);
 
   useEffect(() => {
     if (!open || !asideRef.current) return;
@@ -205,6 +237,9 @@ function CartDrawer() {
             variationId: i.variationId,
             quantity: i.quantity,
           })),
+          pickupName: pickupName.trim() || undefined,
+          phone: phone.trim() || undefined,
+          note: note.trim() || undefined,
         }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
@@ -325,6 +360,69 @@ function CartDrawer() {
                 </li>
               ))}
             </ul>
+          )}
+          {items.length > 0 && (
+            <div className="mt-5 space-y-3 rounded-xl bg-white p-4 shadow-sm">
+              <div>
+                <label
+                  htmlFor="cart-pickup-name"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  Name for collection
+                </label>
+                <input
+                  id="cart-pickup-name"
+                  type="text"
+                  autoComplete="name"
+                  maxLength={80}
+                  value={pickupName}
+                  onChange={(e) => setPickupName(e.target.value)}
+                  placeholder="Your name"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="cart-rewards-phone"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  UK mobile{" "}
+                  <span className="font-normal normal-case text-[#141514]/55">
+                    (optional — earns RV&apos;s Rewards points)
+                  </span>
+                </label>
+                <input
+                  id="cart-rewards-phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="07xxx xxxxxx"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="cart-order-note"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  Order notes{" "}
+                  <span className="font-normal normal-case text-[#141514]/55">
+                    (optional — e.g. oat milk)
+                  </span>
+                </label>
+                <input
+                  id="cart-order-note"
+                  type="text"
+                  maxLength={200}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Milk preference or note for the barista"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+            </div>
           )}
         </div>
 

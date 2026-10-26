@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import AutoVideo from "@/components/AutoVideo";
+import DraftTapIllustration from "@/components/DraftTapIllustration";
 import MapEmbed from "@/components/MapEmbed";
 import Marquee from "@/components/Marquee";
 import MenuItemRow from "@/components/MenuItemRow";
 import OpenStatus from "@/components/OpenStatus";
 import Sticker from "@/components/Sticker";
-import { IMAGES, LOCATION, OPENING_HOURS, VIDEOS } from "@/lib/brand";
+import { CONTACT_EMAIL, IMAGES, LOCATION, OPENING_HOURS, VIDEOS } from "@/lib/brand";
 import { getMenu, type CatalogMenuItem } from "@/lib/catalog";
 
 export const revalidate = 300;
@@ -243,6 +244,12 @@ export default async function Home() {
           >
             24 hours. Cold water. Nothing else.
           </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-cream/85" data-reveal>
+            Our specialty blend of Brazil, Peru and Guatemala coffee, roasted in
+            Northern Ireland by Strangford Coffee Roastery, is cold brewed under
+            nitrogen in our Belfast unit. Every batch is tested for strength
+            (TDS) and pH.
+          </p>
           <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
             {STEPS.map((step, i) => (
               <li
@@ -262,6 +269,67 @@ export default async function Home() {
           <Link href="/process" className="link-under mt-12 inline-block text-cream">
             How we brew it
           </Link>
+        </div>
+      </section>
+
+      {/* Cold brew on tap (Venues & Roasters) */}
+      <section className="overflow-hidden bg-cream text-teal">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)] lg:gap-16">
+            <div data-reveal>
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+                Cold brew as a service · For venues &amp; roasters
+              </p>
+              <h2 className="mt-3 font-display text-6xl leading-[0.9] sm:text-7xl lg:text-8xl">
+                Fresh cold brew on tap, without the hassle.
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+                We supply our cold brew concentrate and nitro cold brew on draft
+                to cafés, bars, restaurants, hotels and gyms across Northern
+                Ireland — and white-label brew for coffee roasters from 4 kegs a
+                month. We install the taps, deliver the 19 L kegs and clean the
+                lines. You just pour.
+              </p>
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {[
+                  { value: "Seconds", label: "to pour an iced coffee" },
+                  { value: "14 days", label: "chilled life in the keg" },
+                  { value: "19 L", label: "reusable steel kegs" },
+                  { value: "£0", label: "equipment to buy" },
+                ].map((stat) => (
+                  <div
+                    key={stat.value}
+                    className="rounded-2xl border-2 border-teal/20 bg-white/75 p-4"
+                  >
+                    <p className="font-display text-4xl leading-none">
+                      {stat.value}
+                    </p>
+                    <p className="mt-1 text-xs font-bold text-ink/70">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/on-tap" className="btn-primary">
+                  Explore Cold Brew on Tap
+                </Link>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}?subject=Book%20a%20demo&body=Hi%20RV%27s%20Cold%20Brew%2C%0A%0AI%27d%20like%20to%20book%20a%20demo%20of%20your%20cold%20brew%20on%20tap.%0A%0AVenue%20name%3A%0ALocation%3A%0APhone%3A%0ABest%20days%2Ftimes%3A%0A%0AThanks`}
+                  className="btn-outline"
+                >
+                  Book a demo
+                </a>
+              </div>
+            </div>
+
+            <div
+              className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-[2rem] bg-teal p-8 text-cream shadow-xl"
+              data-reveal
+            >
+              <DraftTapIllustration className="w-full max-w-[280px]" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -314,17 +382,25 @@ export default async function Home() {
       <section className="bg-cream text-teal">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16 lg:py-28">
           <div data-reveal>
-            <h2 className="font-display text-6xl leading-none sm:text-7xl lg:text-8xl">
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+              Tasting room &amp; showroom
+            </p>
+            <h2 className="mt-2 font-display text-6xl leading-none sm:text-7xl lg:text-8xl">
               Come find us
             </h2>
             <OpenStatus className="mt-5 text-base font-extrabold text-teal" />
-            <address className="mt-8 text-xl not-italic leading-relaxed text-ink/85">
+            <address className="mt-6 text-xl not-italic leading-relaxed text-ink/85">
               {LOCATION.unit}, {LOCATION.name}
               <br />
               {LOCATION.detail}
               <br />
-              {LOCATION.city}
+              {LOCATION.city}, {LOCATION.region}
             </address>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-ink/75">
+              Our tasting room at the front of our brewery serves our cold brew,
+              nitro cold brew, and Okumidori matcha every day. Venue owners are
+              welcome to book a demo.
+            </p>
             <dl className="mt-8 max-w-sm border-t-2 border-teal">
               {OPENING_HOURS.map((row) => (
                 <div
@@ -336,14 +412,19 @@ export default async function Home() {
                 </div>
               ))}
             </dl>
-            <a
-              href={LOCATION.mapsDirectionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary mt-10"
-            >
-              Get directions
-            </a>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a
+                href={LOCATION.mapsDirectionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Get directions
+              </a>
+              <Link href="/on-tap" className="btn-outline">
+                Cold brew on tap
+              </Link>
+            </div>
           </div>
           <MapEmbed />
         </div>

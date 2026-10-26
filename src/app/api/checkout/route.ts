@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { SITE_URL } from "@/lib/brand";
+import { toE164UK } from "@/lib/phone";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { getSquareClient, getSquareLocationId, hasSquareCredentials } from "@/lib/square";
 
@@ -8,6 +9,7 @@ type CheckoutBody = {
   items?: { variationId?: string; quantity?: number }[];
   note?: string;
   pickupName?: string;
+  phone?: string;
 };
 
 export async function POST(request: Request) {
@@ -60,9 +62,13 @@ export async function POST(request: Request) {
   }
 
   const locationId = getSquareLocationId();
+  const pickupName = body.pickupName?.trim().slice(0, 80) || "";
+  const note = body.note?.trim().slice(0, 350) || "";
+  const phoneE164 = body.phone ? toE164UK(body.phone) : null;
+
   const noteParts = [
-    body.pickupName ? `Pickup: ${body.pickupName}` : null,
-    body.note || null,
+    pickupName ? `Pickup: ${pickupName}` : null,
+    note || null,
   ].filter(Boolean);
 
   try {
@@ -78,7 +84,8 @@ export async function POST(request: Request) {
             state: "PROPOSED",
             pickupDetails: {
               recipient: {
-                displayName: body.pickupName || "Collection guest",
+                displayName: pickupName || "Collection guest",
+                ...(phoneE164 ? { phoneNumber: phoneE164 } : {}),
               },
               scheduleType: "ASAP",
             },
@@ -92,6 +99,13 @@ export async function POST(request: Request) {
         redirectUrl: `${SITE_URL}/order/confirmed`,
         askForShippingAddress: false,
       },
+      ...(phoneE164
+        ? {
+            prePopulatedData: {
+              buyerPhoneNumber: phoneE164,
+            },
+          }
+        : {}),
     });
 
     const url = result.paymentLink?.url;

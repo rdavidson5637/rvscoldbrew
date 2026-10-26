@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LOCATION, OPENING_HOURS } from "@/lib/brand";
+import { COMPANY_LEGAL, CONTACT_EMAIL, LOCATION, OPENING_HOURS } from "@/lib/brand";
 
 const footerNav = [
   { href: "/menu", label: "Menu" },
+  { href: "/on-tap", label: "Cold brew on tap" },
   { href: "/order", label: "How collection works" },
   { href: "/rewards", label: "Rewards" },
   { href: "/builder", label: "Find your drink" },
@@ -31,8 +32,18 @@ export default function Footer() {
                 RV&apos;s Cold Brew
               </p>
               <p className="mt-3 max-w-xs text-[0.95rem] leading-relaxed text-cream/70">
-                CoreBrew cold brew and Okumidori matcha. Independent, brewed in
-                Belfast, collection at Unit 11.
+                Fresh cold brew concentrate, nitro cold brew, and Okumidori
+                matcha — brewed in Belfast, served daily in our Unit 11 tasting
+                room and supplied on tap to hospitality venues across Northern
+                Ireland.
+              </p>
+              <p className="mt-3 text-[0.95rem]">
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="font-bold text-cream underline decoration-cream/40 underline-offset-4 hover:decoration-cream"
+                >
+                  {CONTACT_EMAIL}
+                </a>
               </p>
             </div>
           </div>
@@ -60,7 +71,7 @@ export default function Footer() {
               <br />
               {LOCATION.detail}
               <br />
-              {LOCATION.city}
+              {LOCATION.city}, {LOCATION.region}
             </address>
             <dl className="mt-4 space-y-1 text-[0.95rem]">
               {OPENING_HOURS.map((row) => (
@@ -82,7 +93,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-2 border-t border-cream/10 pt-6 text-sm text-cream/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {year} RV&apos;s Cold Brew</p>
+          <p>
+            {COMPANY_LEGAL.line} · &copy; {year}
+          </p>
           <p>Payments handled securely by Square</p>
         </div>
       </div>

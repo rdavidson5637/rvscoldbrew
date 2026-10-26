@@ -32,27 +32,65 @@ const TIMELINE_STEPS = [
     number: "01",
     image: IMAGES.processBlend,
     title: "The blend",
-    subtitle: "Proprietary bean selection",
+    subtitle: "Brazil, Peru & Guatemala — roasted in Northern Ireland",
     description:
-      "We source and blend beans for one goal: maximum smoothness once steeped cold.",
+      "Our specialty blend of Brazil, Peru and Guatemala coffee is roasted in Northern Ireland by Strangford Coffee Roastery for one goal: maximum smoothness once steeped cold.",
   },
   {
     number: "02",
     image: IMAGES.processSteep,
-    title: "The steep",
-    subtitle: "24 hours. Cold water. Nothing else.",
+    title: "The steep & recovery",
+    subtitle: "24 hours under nitrogen · Multi-stage filtration",
     description:
-      "Slow cold extraction pulls out flavour without heat, stripping bitterness and acidity from every batch.",
+      "Slow cold extraction protected under nitrogen pulls out flavour without heat, followed by our high-yield recovery step and multi-stage filtration for a clean, stable brew.",
   },
   {
     number: "03",
     image: IMAGES.processCan,
-    title: "The pour",
-    subtitle: "CoreBrew Coffee Base, ready to drink",
+    title: "Tested, kegged & poured",
+    subtitle: "Strength (TDS) & pH checked on every batch",
     description:
-      "Our CoreBrew Coffee Base powers every hot and iced coffee on the menu. Smooth, never bitter.",
+      "Every batch is lab-checked for TDS and pH before going into sanitised, batch-coded 19 L stainless steel kegs and cans — powering our Unit 11 tasting room and hospitality taps across NI.",
   },
 ];
+
+const BREWERY_STAGES = [
+  {
+    title: "Steep",
+    body: "Slow cold extraction, protected under nitrogen",
+  },
+  {
+    title: "Recover",
+    body: "Our high-yield step gets more from every kilo of coffee",
+  },
+  {
+    title: "Filter",
+    body: "Multi-stage filtration for a clean, stable brew",
+  },
+  {
+    title: "Test",
+    body: "Strength (TDS) and pH checked on every batch",
+  },
+  {
+    title: "Keg",
+    body: "Sanitised steel kegs, batch-coded and dated",
+  },
+] as const;
+
+const BREWERY_CARDS = [
+  {
+    title: "Fresh, not long-life",
+    body: "Unpasteurised and kept chilled, with a 14-day life in the keg, so it tastes like proper specialty coffee.",
+  },
+  {
+    title: "Less waste",
+    body: "Venues pour only what they sell instead of throwing away jugs of home-made cold brew after a day or two.",
+  },
+  {
+    title: "No single-use packaging",
+    body: "Our stainless steel kegs are cleaned and reused, replacing hundreds of cans and bottles.",
+  },
+] as const;
 
 const HOT_BREW_POINTS = [
   "Higher acidity",
@@ -116,8 +154,59 @@ export default function ProcessPage() {
       <Marquee
         tone="teal"
         speed={32}
-        items={["No heat", "No bitterness", "24 hours", "Cold water", "CoreBrew Coffee Base"]}
+        items={[
+          "Brazil, Peru & Guatemala blend",
+          "Nitrogen-protected steep",
+          "TDS & pH tested",
+          "14-day chilled keg life",
+          "CoreBrew Coffee Base",
+        ]}
       />
+
+      <section className="bg-teal px-4 py-16 text-cream sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/70" data-reveal>
+            Small-batch, measured, fresh
+          </p>
+          <h2 className="mt-3 font-display text-6xl leading-none sm:text-7xl" data-reveal>
+            Five stages in our Belfast brewery
+          </h2>
+          <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" data-reveal>
+            {BREWERY_STAGES.map((stage, i) => (
+              <li
+                key={stage.title}
+                className="rounded-[1.5rem] border-2 border-cream/20 bg-white/5 p-6"
+              >
+                <span className="font-display text-3xl leading-none text-cream/40">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-2 font-display text-3xl leading-none">
+                  {stage.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-cream/80">
+                  {stage.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3" data-reveal>
+            {BREWERY_CARDS.map((card) => (
+              <article
+                key={card.title}
+                className="rounded-[2rem] bg-cream p-8 text-teal"
+              >
+                <h3 className="font-display text-4xl leading-none">
+                  {card.title}
+                </h3>
+                <p className="mt-3 text-base leading-relaxed text-ink/80">
+                  {card.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-ink px-4 py-16 text-cream sm:px-6 lg:py-24">
         <div className="mx-auto max-w-5xl">
@@ -187,6 +276,9 @@ export default function ProcessPage() {
           <div className="flex flex-wrap gap-3">
             <Link href="/menu" className="btn-cream">
               Order ahead
+            </Link>
+            <Link href="/on-tap" className="btn-ghost-cream">
+              Cold brew on tap
             </Link>
             <Link href="/order" className="btn-ghost-cream">
               How collection works

@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, FormEvent, useEffect } from "react";
+import { CONTACT_EMAIL } from "@/lib/brand";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 const enquiryTypes = [
   { value: "", label: "Select enquiry type" },
+  { value: "on-tap", label: "Cold Brew on Tap (Venue Demo / Trial Keg)" },
+  { value: "white-label", label: "White-Label Brewing (For Coffee Roasters)" },
   { value: "wholesale", label: "Wholesale" },
   { value: "events", label: "Events & Catering" },
   { value: "corporate", label: "Corporate Orders" },
@@ -17,23 +21,42 @@ const enquiryTypes = [
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
+  const searchParams = useSearchParams();
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [enquiryType, setEnquiryType] = useState("");
+
+  useEffect(() => {
+    const param = searchParams.get("type");
+    if (param && enquiryTypes.some((t) => t.value === param)) {
+      setEnquiryType(param);
+    }
+  }, [searchParams]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    if (!FORMSPREE_ENDPOINT) {
-      setStatus("error");
-      setErrorMessage("Contact form is not configured. Please try again later.");
-      return;
-    }
-    
-    setStatus("submitting");
-    setErrorMessage("");
-
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    if (!FORMSPREE_ENDPOINT) {
+      const name = String(formData.get("name") || "");
+      const email = String(formData.get("email") || "");
+      const phone = String(formData.get("phone") || "");
+      const company = String(formData.get("company") || "");
+      const type = String(formData.get("enquiry_type") || "Enquiry");
+      const message = String(formData.get("message") || "");
+      const subject = `RV's Cold Brew Enquiry: ${type}${company ? ` (${company})` : ""}`;
+      const body = `Name: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ""}${company ? `\nVenue / Company: ${company}` : ""}\nEnquiry Type: ${type}\n\n${message}`;
+      const a = document.createElement("a");
+      a.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
 
     try {
       const response = await fetch(
@@ -198,6 +221,8 @@ export default function ContactForm() {
           id="enquiry_type"
           name="enquiry_type"
           required
+          value={enquiryType}
+          onChange={(e) => setEnquiryType(e.target.value)}
           className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
         >
           {enquiryTypes.map((type) => (

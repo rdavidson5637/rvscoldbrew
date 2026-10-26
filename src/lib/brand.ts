@@ -8,12 +8,24 @@ export const SITE_URL =
 export const LOCATION = {
   unit: "Unit 11",
   name: "Great Northern Mall",
+  street: "48–52 Great Victoria Street",
   detail: "Near Grand Central Station",
-  city: "Belfast, Northern Ireland",
-  full: "Unit 11, Great Northern Mall, Belfast, near Grand Central Station",
-  mapsQuery: "Great+Northern+Mall,+Belfast,+Northern+Ireland",
+  postcode: "BT2 7GN",
+  city: "Belfast, BT2 7GN",
+  region: "Northern Ireland",
+  full: "Unit 11, Great Northern Mall, Belfast BT2 7GN, near Grand Central Station",
+  mapsQuery: "Great+Northern+Mall,+Belfast+BT2+7GN,+Northern+Ireland",
   mapsDirectionsUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast,+Northern+Ireland",
+    "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast+BT2+7GN,+Northern+Ireland",
+} as const;
+
+export const CONTACT_EMAIL = "info@rvscoldbrew.co.uk";
+
+export const COMPANY_LEGAL = {
+  name: "RV's Cold Brew Ltd",
+  jurisdiction: "Registered in Northern Ireland",
+  companyNumber: "NI737247",
+  line: "RV's Cold Brew Ltd · Registered in Northern Ireland, company number NI737247",
 } as const;
 
 export const OPENING_HOURS = [

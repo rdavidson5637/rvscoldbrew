@@ -1,17 +1,20 @@
-import { LOCATION, SITE_URL } from "@/lib/brand";
+import { COMPANY_LEGAL, CONTACT_EMAIL, LOCATION, SITE_URL } from "@/lib/brand";
 
 export default function JsonLd() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CafeOrCoffeeShop",
     name: "RV's Cold Brew",
+    legalName: COMPANY_LEGAL.name,
     description:
-      "CoreBrew Coffee Base and Okumidori matcha. Born in Belfast. Collection at Unit 11, Great Northern Mall.",
+      "CoreBrew Coffee Base, nitro cold brew, and Okumidori matcha. Brewed in Belfast, served daily at Unit 11, Great Northern Mall, and supplied on tap across Northern Ireland.",
     url: SITE_URL,
+    email: CONTACT_EMAIL,
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${LOCATION.unit}, ${LOCATION.name}`,
+      streetAddress: `${LOCATION.unit}, ${LOCATION.name}, ${LOCATION.street}`,
       addressLocality: "Belfast",
+      postalCode: LOCATION.postcode,
       addressRegion: "Northern Ireland",
       addressCountry: "GB",
     },

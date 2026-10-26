@@ -325,13 +325,34 @@
   }
 }
 
+@keyframes tap-drip {
+  0%,
+  55% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  62% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160px);
+    opacity: 0;
+  }
+}
+
+.tap-drip {
+  animation: tap-drip 2.8s ease-in infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .marquee-track {
+  .marquee-track,
+  .tap-drip {
     animation: none !important;
+    opacity: 0;
   }
 
   .reveal-ready [data-reveal]:not([data-revealed]) {
