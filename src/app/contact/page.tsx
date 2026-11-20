@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
-import OpenStatus from "@/components/OpenStatus";
 import PageHeader from "@/components/PageHeader";
 import {
   CONTACT_EMAIL,
@@ -89,7 +88,6 @@ export default function ContactPage() {
               <p className="mt-4 text-sm font-extrabold text-cream">
                 {TASTING_ROOM_CADENCE}
               </p>
-              <OpenStatus className="mt-2 font-extrabold" />
               <address className="mt-4 text-lg not-italic leading-relaxed text-cream/85">
                 {LOCATION.unit}, {LOCATION.name}
                 <br />

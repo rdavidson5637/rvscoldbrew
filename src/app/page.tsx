@@ -5,7 +5,6 @@ import DraftTapIllustration from "@/components/DraftTapIllustration";
 import MapEmbed from "@/components/MapEmbed";
 import Marquee from "@/components/Marquee";
 import MenuItemRow from "@/components/MenuItemRow";
-import OpenStatus from "@/components/OpenStatus";
 import Sticker from "@/components/Sticker";
 import {
   CONTACT_EMAIL,
@@ -400,7 +399,6 @@ export default async function Home() {
             <p className="mt-5 text-base font-extrabold text-teal">
               {TASTING_ROOM_CADENCE}
             </p>
-            <OpenStatus className="mt-2 text-base font-extrabold text-teal" />
             <address className="mt-6 text-xl not-italic leading-relaxed text-ink/85">
               {LOCATION.unit}, {LOCATION.name}
               <br />
