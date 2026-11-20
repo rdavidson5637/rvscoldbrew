@@ -57,14 +57,13 @@ export default function ContactPage() {
                 {OFFERS.map((offer) => (
                   <li
                     key={offer}
-                    className="flex items-start gap-3 border-b-2 border-dotted border-teal/20 py-3 text-lg font-bold"
+                    className="border-b-2 border-dotted border-teal/20 py-3.5 text-lg font-bold leading-snug"
                   >
-                    <span aria-hidden>✓</span>
                     {offer}
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 flex flex-wrap gap-3">
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=Book%20a%20demo&body=Hi%20RV%27s%20Cold%20Brew%2C%0A%0AI%27d%20like%20to%20book%20a%20demo%20of%20your%20cold%20brew%20on%20tap.%0A%0AVenue%20name%3A%0ALocation%3A%0APhone%3A%0ABest%20days%2Ftimes%3A%0A%0AThanks`}
                   className="btn-primary"
@@ -73,15 +72,15 @@ export default function ContactPage() {
                 </a>
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=Cold%20brew%20on%20tap%20enquiry`}
-                  className="btn-outline"
+                  className="link-under text-teal"
                 >
                   {CONTACT_EMAIL}
                 </a>
               </div>
             </div>
 
-            <div className="rounded-[2rem] bg-teal p-8 text-cream">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/65">
+            <div className="border-2 border-teal bg-teal p-8 text-cream">
+              <p className="kicker text-cream/65">
                 Tasting room &amp; showroom
               </p>
               <h2 className="mt-2 font-display text-4xl leading-none">

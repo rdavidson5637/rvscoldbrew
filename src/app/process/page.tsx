@@ -171,35 +171,35 @@ export default function ProcessPage() {
           <h2 className="mt-3 font-display text-6xl leading-none sm:text-7xl" data-reveal>
             Five stages in our Belfast brewery
           </h2>
-          <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" data-reveal>
+          <ol
+            className="mt-10 divide-y-2 divide-dotted divide-cream/25 border-y-2 border-cream/35"
+            data-reveal
+          >
             {BREWERY_STAGES.map((stage, i) => (
               <li
                 key={stage.title}
-                className="rounded-[1.5rem] border-2 border-cream/20 bg-white/5 p-6"
+                className="grid gap-2 py-5 sm:grid-cols-[4.5rem_minmax(0,10rem)_minmax(0,1fr)] sm:items-baseline sm:gap-6"
               >
                 <span className="font-display text-3xl leading-none text-cream/40">
                   0{i + 1}
                 </span>
-                <h3 className="mt-2 font-display text-3xl leading-none">
+                <h3 className="font-display text-3xl leading-none">
                   {stage.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-cream/80">
+                <p className="max-w-xl text-sm leading-relaxed text-cream/80 sm:text-base">
                   {stage.body}
                 </p>
               </li>
             ))}
           </ol>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3" data-reveal>
+          <div className="mt-14 grid gap-10 border-t-2 border-cream/25 pt-10 md:grid-cols-3 md:gap-8" data-reveal>
             {BREWERY_CARDS.map((card) => (
-              <article
-                key={card.title}
-                className="rounded-[2rem] bg-cream p-8 text-teal"
-              >
-                <h3 className="font-display text-4xl leading-none">
+              <article key={card.title}>
+                <h3 className="font-display text-4xl leading-none text-cream">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-ink/80">
+                <p className="mt-3 max-w-sm text-base leading-relaxed text-cream/80">
                   {card.body}
                 </p>
               </article>
@@ -213,28 +213,22 @@ export default function ProcessPage() {
           <h2 className="font-display text-6xl leading-none sm:text-7xl" data-reveal>
             Hot vs cold
           </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2" data-reveal>
-            <article className="rounded-[2rem] border-2 border-cream/15 p-8">
+          <div className="mt-10 grid gap-0 border-y-2 border-cream/20 md:grid-cols-2 md:divide-x-2 md:divide-cream/20" data-reveal>
+            <article className="px-6 py-8 sm:px-8">
               <h3 className="font-display text-4xl leading-none text-cream/50">Hot brew</h3>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 divide-y divide-cream/15 border-t border-cream/15">
                 {HOT_BREW_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-lg text-cream/55">
-                    <span className="mt-0.5 shrink-0" aria-hidden>
-                      ✕
-                    </span>
+                  <li key={point} className="py-3 text-lg text-cream/55">
                     {point}
                   </li>
                 ))}
               </ul>
             </article>
-            <article className="rounded-[2rem] bg-cream p-8 text-teal">
+            <article className="border-t-2 border-cream/20 bg-cream px-6 py-8 text-teal sm:px-8 md:border-t-0">
               <h3 className="font-display text-4xl leading-none">Cold brew</h3>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 divide-y divide-teal/15 border-t border-teal/15">
                 {COLD_BREW_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-lg font-bold">
-                    <span className="mt-0.5 shrink-0" aria-hidden>
-                      ✓
-                    </span>
+                  <li key={point} className="py-3 text-lg font-bold">
                     {point}
                   </li>
                 ))}
@@ -273,14 +267,14 @@ export default function ProcessPage() {
           <h2 className="font-display text-6xl leading-[0.9] sm:text-7xl">
             Taste the difference.
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
             <Link href="/menu" className="btn-cream">
               Order ahead
             </Link>
-            <Link href="/on-tap" className="btn-ghost-cream">
+            <Link href="/on-tap" className="link-under text-cream">
               Cold brew on tap
             </Link>
-            <Link href="/order" className="btn-ghost-cream">
+            <Link href="/order" className="link-under text-cream">
               How collection works
             </Link>
           </div>

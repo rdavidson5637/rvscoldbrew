@@ -63,7 +63,7 @@ export default function MenuCategoryNav({
   return (
     <nav
       aria-label="Menu categories"
-      className="sticky top-[var(--header-h)] z-30 border-b-2 border-teal/10 bg-cream/95 backdrop-blur-sm"
+      className="sticky top-[var(--header-h)] z-30 border-b-2 border-teal/10 bg-cream"
     >
       <ul
         ref={listRef}

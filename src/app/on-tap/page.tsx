@@ -104,7 +104,7 @@ export default function OnTapPage() {
       <section className="relative overflow-hidden bg-teal text-cream">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.9fr)] lg:pb-24 lg:pt-20">
           <div>
-            <p className="rise text-xs font-extrabold uppercase tracking-[0.2em] text-cream/75">
+            <p className="rise kicker text-cream/75">
               Brewed in Belfast · Hospitality &amp; Roasters
             </p>
             <h1 className="rise mt-4 font-display text-6xl leading-[0.88] delay-100 sm:text-7xl lg:text-8xl">
@@ -117,16 +117,13 @@ export default function OnTapPage() {
               and gyms. We install the taps, deliver the kegs and clean the
               lines. You just pour.
             </p>
-            <div className="rise mt-8 flex flex-wrap gap-3 delay-300">
+            <div className="rise mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 delay-300">
               <a href={BOOK_DEMO_MAILTO} className="btn-cream">
                 Book a demo
               </a>
-              <a href="#how" className="btn-ghost-cream">
+              <a href="#how" className="link-under text-cream">
                 How it works
               </a>
-              <Link href="/contact?type=on-tap" className="btn-ghost-cream">
-                Enquiry form
-              </Link>
             </div>
           </div>
 
@@ -164,10 +161,10 @@ export default function OnTapPage() {
       </section>
 
       {/* How it works — Cold brew as a service */}
-      <section id="how" className="scroll-mt-28 bg-cream px-4 py-20 text-teal sm:px-6 lg:py-28">
+      <section id="how" className="scroll-mt-28 bg-cream px-4 section-pad text-teal sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div data-reveal>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+            <p className="kicker text-teal/70">
               Cold brew as a service
             </p>
             <h2 className="mt-3 max-w-3xl font-display text-6xl leading-[0.9] sm:text-7xl">
@@ -180,21 +177,21 @@ export default function OnTapPage() {
             </p>
           </div>
 
-          <ol className="mt-14 grid gap-8 md:grid-cols-3">
+          <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
             {SERVICE_STEPS.map((step, i) => (
               <li
                 key={step.number}
                 data-reveal
                 style={{ ["--reveal-delay" as string]: `${i * 100}ms` }}
-                className="flex flex-col rounded-[2rem] border-2 border-teal bg-white/80 p-8"
+                className="border-t-2 border-teal pt-6"
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-teal font-display text-2xl text-cream">
+                <p className="font-display text-7xl leading-none text-teal/25">
                   {step.number}
-                </span>
-                <h3 className="mt-6 font-display text-4xl leading-none">
+                </p>
+                <h3 className="mt-4 font-display text-4xl leading-none">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-ink/80">
+                <p className="mt-3 max-w-sm text-base leading-relaxed text-ink/80">
                   {step.body}
                 </p>
               </li>
@@ -204,10 +201,10 @@ export default function OnTapPage() {
       </section>
 
       {/* Two taps, one system */}
-      <section id="products" className="scroll-mt-28 bg-ink px-4 py-20 text-cream sm:px-6 lg:py-28">
+      <section id="products" className="scroll-mt-28 bg-ink px-4 section-pad text-cream sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div data-reveal>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/65">
+            <p className="kicker text-cream/65">
               Two taps, one system
             </p>
             <h2 className="mt-3 max-w-3xl font-display text-6xl leading-[0.9] sm:text-7xl">
@@ -215,51 +212,47 @@ export default function OnTapPage() {
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2" data-reveal>
-            <article className="flex flex-col rounded-[2rem] border-2 border-cream/20 bg-teal p-8 sm:p-10">
-              <span className="w-fit rounded-full bg-cream/15 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-cream">
-                Tap one
-              </span>
-              <h3 className="mt-5 font-display text-5xl leading-none">
+          <div className="mt-12 grid gap-0 border-y-2 border-cream/20 md:grid-cols-2 md:divide-x-2 md:divide-cream/20" data-reveal>
+            <article className="flex flex-col bg-teal px-6 py-10 sm:px-10 sm:py-12">
+              <p className="kicker text-cream/65">Tap one</p>
+              <h3 className="mt-4 font-display text-5xl leading-none">
                 Cold brew concentrate
               </h3>
-              <p className="mt-3 text-base leading-relaxed text-cream/85">
+              <p className="mt-3 max-w-md text-base leading-relaxed text-cream/85">
                 Smooth, strong specialty cold brew for building drinks in
                 seconds.
               </p>
-              <ul className="mt-6 divide-y divide-cream/20 border-t border-cream/20 text-base text-cream/90">
-                <li className="py-3 font-bold">
-                  ✓ Iced lattes and iced Americanos
+              <ul className="mt-6 border-t-2 border-cream/20 text-base text-cream/90">
+                <li className="border-b border-cream/15 py-3.5 font-bold">
+                  Iced lattes and iced Americanos
                 </li>
-                <li className="py-3 font-bold">
-                  ✓ Espresso Martinis and coffee cocktails
+                <li className="border-b border-cream/15 py-3.5 font-bold">
+                  Espresso Martinis and coffee cocktails
                 </li>
-                <li className="py-3 font-bold">
-                  ✓ Around 300 drinks from every keg
+                <li className="py-3.5 font-bold">
+                  Around 300 drinks from every keg
                 </li>
               </ul>
             </article>
 
-            <article className="flex flex-col rounded-[2rem] border-2 border-cream/30 bg-teal-deep p-8 sm:p-10">
-              <span className="w-fit rounded-full bg-cream text-teal px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider">
-                Tap two
-              </span>
-              <h3 className="mt-5 font-display text-5xl leading-none">
+            <article className="flex flex-col border-t-2 border-cream/20 bg-teal-deep px-6 py-10 sm:px-10 sm:py-12 md:border-t-0">
+              <p className="kicker text-cream/65">Tap two</p>
+              <h3 className="mt-4 font-display text-5xl leading-none">
                 Nitro cold brew
               </h3>
-              <p className="mt-3 text-base leading-relaxed text-cream/85">
+              <p className="mt-3 max-w-md text-base leading-relaxed text-cream/85">
                 Ready to pour, with a creamy cascading head and no milk or sugar
                 needed.
               </p>
-              <ul className="mt-6 divide-y divide-cream/20 border-t border-cream/20 text-base text-cream/90">
-                <li className="py-3 font-bold">
-                  ✓ A premium drink in its own right
+              <ul className="mt-6 border-t-2 border-cream/20 text-base text-cream/90">
+                <li className="border-b border-cream/15 py-3.5 font-bold">
+                  A premium drink in its own right
                 </li>
-                <li className="py-3 font-bold">
-                  ✓ Poured straight from the tap
+                <li className="border-b border-cream/15 py-3.5 font-bold">
+                  Poured straight from the tap
                 </li>
-                <li className="py-3 font-bold">
-                  ✓ Served daily in our tasting room
+                <li className="py-3.5 font-bold">
+                  Served daily in our tasting room
                 </li>
               </ul>
             </article>
@@ -279,10 +272,10 @@ export default function OnTapPage() {
       />
 
       {/* For Coffee Roasters */}
-      <section id="roasters" className="scroll-mt-28 bg-matcha px-4 py-20 text-matcha-ink sm:px-6 lg:py-28">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
+      <section id="roasters" className="scroll-mt-28 bg-matcha px-4 section-pad text-matcha-ink sm:px-6">
+        <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
           <div data-reveal>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-matcha-ink/70">
+            <p className="kicker text-matcha-ink/70">
               For coffee roasters
             </p>
             <h2 className="mt-3 font-display text-6xl leading-[0.9] sm:text-7xl">
@@ -297,9 +290,8 @@ export default function OnTapPage() {
               {ROASTER_POINTS.map((point) => (
                 <li
                   key={point}
-                  className="flex items-start gap-3 py-3.5 text-lg font-bold"
+                  className="py-3.5 text-lg font-bold leading-snug"
                 >
-                  <span aria-hidden>✓</span>
                   {point}
                 </li>
               ))}
@@ -308,9 +300,9 @@ export default function OnTapPage() {
 
           <aside
             data-reveal
-            className="rounded-[2rem] bg-teal p-8 text-cream shadow-xl sm:p-10"
+            className="border-2 border-matcha-ink bg-teal p-8 text-cream sm:p-10"
           >
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/65">
+            <p className="kicker text-cream/65">
               Proven in Northern Ireland
             </p>
             <h3 className="mt-3 font-display text-5xl leading-none">
@@ -321,11 +313,11 @@ export default function OnTapPage() {
               brew, and is our first draft partner, pouring cold brew made from
               its own beans on our tap system.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a href={WHITE_LABEL_MAILTO} className="btn-cream">
                 Talk to us about white-label
               </a>
-              <Link href="/contact?type=white-label" className="btn-ghost-cream">
+              <Link href="/contact?type=white-label" className="link-under text-cream">
                 Enquiry form
               </Link>
             </div>
@@ -334,10 +326,10 @@ export default function OnTapPage() {
       </section>
 
       {/* How we brew */}
-      <section id="process" className="scroll-mt-28 bg-cream px-4 py-20 text-teal sm:px-6 lg:py-28">
+      <section id="process" className="scroll-mt-28 bg-cream px-4 section-pad text-teal sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div data-reveal>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+            <p className="kicker text-teal/70">
               How we brew
             </p>
             <h2 className="mt-3 font-display text-6xl leading-[0.9] sm:text-7xl">
@@ -351,37 +343,34 @@ export default function OnTapPage() {
           </div>
 
           <ol
-            className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
+            className="mt-12 divide-y-2 divide-dotted divide-teal/20 border-y-2 border-teal"
             data-reveal
           >
             {BREW_STEPS.map((step, i) => (
               <li
                 key={step.title}
-                className="rounded-[1.5rem] border-2 border-teal bg-white/85 p-6"
+                className="grid gap-2 py-5 sm:grid-cols-[4.5rem_minmax(0,10rem)_minmax(0,1fr)] sm:items-baseline sm:gap-6"
               >
                 <span className="font-display text-3xl leading-none text-teal/35">
                   0{i + 1}
                 </span>
-                <h3 className="mt-2 font-display text-3xl leading-none">
+                <h3 className="font-display text-3xl leading-none">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/75">
+                <p className="max-w-xl text-base leading-relaxed text-ink/75">
                   {step.body}
                 </p>
               </li>
             ))}
           </ol>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3" data-reveal>
+          <div className="mt-14 grid gap-10 border-t-2 border-teal pt-10 md:grid-cols-3 md:gap-8" data-reveal>
             {BREW_BENEFITS.map((benefit) => (
-              <article
-                key={benefit.title}
-                className="rounded-[2rem] bg-teal p-8 text-cream"
-              >
-                <h3 className="font-display text-4xl leading-none">
+              <article key={benefit.title}>
+                <h3 className="font-display text-4xl leading-none text-teal">
                   {benefit.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-cream/85">
+                <p className="mt-3 max-w-sm text-base leading-relaxed text-ink/80">
                   {benefit.body}
                 </p>
               </article>
@@ -391,11 +380,11 @@ export default function OnTapPage() {
       </section>
 
       {/* Tasting room & showroom + CTA */}
-      <section id="visit" className="scroll-mt-28 bg-ink px-4 py-20 text-cream sm:px-6 lg:py-28">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2" data-reveal>
-          <article className="flex flex-col justify-between rounded-[2rem] border-2 border-cream/20 bg-white/5 p-8 sm:p-10">
+      <section id="visit" className="scroll-mt-28 bg-ink px-4 section-pad text-cream sm:px-6">
+        <div className="mx-auto grid max-w-7xl gap-0 border-y-2 border-cream/20 md:grid-cols-2 md:divide-x-2 md:divide-cream/20" data-reveal>
+          <article className="flex flex-col justify-between px-6 py-10 sm:px-10 sm:py-12">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/65">
+              <p className="kicker text-cream/65">
                 Tasting room &amp; showroom
               </p>
               <h2 className="mt-3 font-display text-5xl leading-none sm:text-6xl">
@@ -418,7 +407,7 @@ export default function OnTapPage() {
                 demo.
               </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a
                 href={LOCATION.mapsDirectionsUrl}
                 target="_blank"
@@ -427,15 +416,15 @@ export default function OnTapPage() {
               >
                 Get directions
               </a>
-              <Link href="/menu" className="btn-ghost-cream">
+              <Link href="/menu" className="link-under text-cream">
                 See tasting room menu
               </Link>
             </div>
           </article>
 
-          <article className="flex flex-col justify-between rounded-[2rem] bg-teal p-8 text-cream sm:p-10">
+          <article className="flex flex-col justify-between border-t-2 border-cream/20 bg-teal px-6 py-10 sm:px-10 sm:py-12 md:border-t-0">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-cream/70">
+              <p className="kicker text-cream/70">
                 For venues and roasters
               </p>
               <h2 className="mt-3 font-display text-5xl leading-none sm:text-6xl">
@@ -446,14 +435,14 @@ export default function OnTapPage() {
                 trial keg.
               </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={ENQUIRY_MAILTO} className="btn-cream">
-                {CONTACT_EMAIL}
-              </a>
-              <a href={BOOK_DEMO_MAILTO} className="btn-ghost-cream">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <a href={BOOK_DEMO_MAILTO} className="btn-cream">
                 Book a demo
               </a>
-              <Link href="/contact" className="btn-ghost-cream">
+              <a href={ENQUIRY_MAILTO} className="link-under text-cream">
+                {CONTACT_EMAIL}
+              </a>
+              <Link href="/contact" className="link-under text-cream">
                 Online enquiry form
               </Link>
             </div>

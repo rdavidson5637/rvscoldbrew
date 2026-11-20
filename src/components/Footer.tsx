@@ -49,12 +49,12 @@ export default function Footer() {
 
           <nav aria-label="Footer">
             <h2 className="font-display text-2xl tracking-wide text-cream/50">Explore</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4">
               {footerNav.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className="border-b border-cream/10 last:border-0">
                   <Link
                     href={link.href}
-                    className="font-bold text-cream/85 transition-colors hover:text-cream hover:underline hover:underline-offset-4"
+                    className="flex min-h-11 items-center font-bold text-cream/85 transition-colors hover:text-cream hover:underline hover:underline-offset-4"
                   >
                     {link.label}
                   </Link>

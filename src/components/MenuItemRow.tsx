@@ -97,7 +97,7 @@ export default function MenuItemRow({
                   type="button"
                   disabled={v.soldOut}
                   onClick={() => setSelectedVarId(v.id)}
-                  className={`rounded-full border px-3 py-1 text-xs font-extrabold transition-colors disabled:opacity-40 ${
+                  className={`inline-flex min-h-11 items-center rounded-full border px-3.5 text-xs font-extrabold transition-colors disabled:opacity-40 ${
                     selected
                       ? "border-teal bg-teal text-cream"
                       : "border-current/25 hover:border-current"

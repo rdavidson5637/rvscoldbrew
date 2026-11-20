@@ -26,7 +26,7 @@ export default function PageHeader({
     <header className={`relative overflow-hidden ${TONES[tone]}`}>
       <div className="mx-auto grid max-w-7xl items-end gap-10 px-4 pb-14 pt-12 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto] lg:pb-20 lg:pt-16">
         <div>
-          <h1 className="rise font-display text-[clamp(3.75rem,10vw,8.5rem)] leading-[0.86]">
+          <h1 className="rise font-display text-[clamp(3rem,12vw,8.5rem)] leading-[0.86] tracking-tight">
             {title}
           </h1>
           {intro && (

@@ -284,7 +284,7 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)] lg:gap-16">
             <div data-reveal>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+              <p className="kicker text-teal/70">
                 Cold brew as a service · For venues &amp; roasters
               </p>
               <h2 className="mt-3 font-display text-6xl leading-[0.9] sm:text-7xl lg:text-8xl">
@@ -297,33 +297,35 @@ export default async function Home() {
                 month. We install the taps, deliver the 19 L kegs and clean the
                 lines. You just pour.
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <dl className="mt-8 grid grid-cols-2 border-y-2 border-teal sm:grid-cols-4 sm:divide-x-2 sm:divide-teal/20">
                 {[
                   { value: "Seconds", label: "to pour an iced coffee" },
                   { value: "14 days", label: "chilled life in the keg" },
                   { value: "19 L", label: "reusable steel kegs" },
                   { value: "£0", label: "equipment to buy" },
-                ].map((stat) => (
+                ].map((stat, idx) => (
                   <div
                     key={stat.value}
-                    className="rounded-2xl border-2 border-teal/20 bg-white/75 p-4"
+                    className={`px-3 py-4 sm:px-4 ${
+                      idx < 2 ? "max-sm:border-b-2 max-sm:border-teal/20" : ""
+                    } ${idx % 2 === 0 ? "max-sm:border-r-2 max-sm:border-teal/20" : ""}`}
                   >
-                    <p className="font-display text-4xl leading-none">
+                    <dt className="font-display text-4xl leading-none">
                       {stat.value}
-                    </p>
-                    <p className="mt-1 text-xs font-bold text-ink/70">
+                    </dt>
+                    <dd className="mt-1 text-xs font-bold text-ink/70">
                       {stat.label}
-                    </p>
+                    </dd>
                   </div>
                 ))}
-              </div>
-              <div className="mt-8 flex flex-wrap gap-3">
+              </dl>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
                 <Link href="/on-tap" className="btn-primary">
                   Explore Cold Brew on Tap
                 </Link>
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=Book%20a%20demo&body=Hi%20RV%27s%20Cold%20Brew%2C%0A%0AI%27d%20like%20to%20book%20a%20demo%20of%20your%20cold%20brew%20on%20tap.%0A%0AVenue%20name%3A%0ALocation%3A%0APhone%3A%0ABest%20days%2Ftimes%3A%0A%0AThanks`}
-                  className="btn-outline"
+                  className="link-under text-teal"
                 >
                   Book a demo
                 </a>
@@ -331,7 +333,7 @@ export default async function Home() {
             </div>
 
             <div
-              className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-[2rem] bg-teal p-8 text-cream shadow-xl"
+              className="relative mx-auto flex w-full max-w-sm items-center justify-center border-2 border-teal bg-teal p-8 text-cream"
               data-reveal
             >
               <DraftTapIllustration className="w-full max-w-[280px]" />
@@ -371,7 +373,7 @@ export default async function Home() {
               Independent, and made at Unit 11 near Grand Central Station.
               Grab one on the way to the train, or take it for a walk round town.
             </p>
-            <div className="mt-10 rounded-[2rem] border-2 border-cream/15 p-6 sm:p-8">
+            <div className="mt-10 border-t-2 border-cream/25 pt-8">
               <h3 className="font-display text-4xl leading-none">Every cup counts</h3>
               <p className="mt-3 max-w-sm text-base leading-relaxed text-cream/75">
                 Join RV&apos;s Rewards free with your mobile number. Points build up
@@ -389,7 +391,7 @@ export default async function Home() {
       <section className="bg-cream text-teal">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16 lg:py-28">
           <div data-reveal>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-teal/70">
+            <p className="kicker text-teal/70">
               Tasting room &amp; showroom
             </p>
             <h2 className="mt-2 font-display text-6xl leading-none sm:text-7xl lg:text-8xl">
@@ -424,7 +426,7 @@ export default async function Home() {
                 </div>
               ))}
             </dl>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a
                 href={LOCATION.mapsDirectionsUrl}
                 target="_blank"
@@ -433,7 +435,7 @@ export default async function Home() {
               >
                 Get directions
               </a>
-              <Link href="/on-tap" className="btn-outline">
+              <Link href="/on-tap" className="link-under text-teal">
                 Cold brew on tap
               </Link>
             </div>

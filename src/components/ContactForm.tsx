@@ -88,7 +88,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div 
-        className="rounded-[2rem] border-2 border-teal bg-white/70 p-8 text-center sm:p-12"
+        className="border-2 border-teal bg-cream p-8 text-center sm:p-12"
         role="status"
         aria-live="polite"
       >
@@ -129,7 +129,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-[2rem] border-2 border-teal bg-white/70 p-6 sm:p-10"
+      className="space-y-6 border-2 border-teal bg-cream p-6 sm:p-10"
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
@@ -145,7 +145,7 @@ export default function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="Your name"
           />
         </div>
@@ -163,7 +163,7 @@ export default function ContactForm() {
             name="email"
             required
             autoComplete="email"
-            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="you@example.com"
           />
         </div>
@@ -176,7 +176,7 @@ export default function ContactForm() {
             className="block text-sm font-extrabold text-teal"
           >
             Phone{" "}
-            <span className="font-normal text-[#141514]/50">
+            <span className="font-normal text-ink/50">
               (optional)
             </span>
           </label>
@@ -185,7 +185,7 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             autoComplete="tel"
-            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="+44 7XXX XXXXXX"
           />
         </div>
@@ -196,7 +196,7 @@ export default function ContactForm() {
             className="block text-sm font-extrabold text-teal"
           >
             Company or organisation{" "}
-            <span className="font-normal text-[#141514]/50">
+            <span className="font-normal text-ink/50">
               (optional)
             </span>
           </label>
@@ -205,7 +205,7 @@ export default function ContactForm() {
             id="company"
             name="company"
             autoComplete="organization"
-            className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="Your company name"
           />
         </div>
@@ -224,7 +224,7 @@ export default function ContactForm() {
           required
           value={enquiryType}
           onChange={(e) => setEnquiryType(e.target.value)}
-          className="mt-2 block w-full rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+          className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink transition-colors focus:border-teal focus:outline-none focus:ring-0"
         >
           {enquiryTypes.map((type) => (
             <option key={type.value} value={type.value}>
@@ -246,7 +246,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 block w-full resize-none rounded-2xl border-2 border-teal/20 bg-cream/50 px-4 py-3.5 text-ink placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+          className="mt-2 block w-full resize-none border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
           placeholder="What do you need, and when?"
         />
       </div>
@@ -295,7 +295,7 @@ export default function ContactForm() {
         )}
       </button>
 
-      <p className="text-center text-xs text-[#141514]/50">
+      <p className="text-center text-xs text-ink/50">
         We only use your details to reply to this enquiry.
       </p>
     </form>
