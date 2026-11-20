@@ -93,12 +93,12 @@ function findDrink(
 }
 
 const tileBase =
-  "group relative flex w-full flex-col overflow-hidden rounded-[2rem] text-left transition duration-200 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-teal";
+  "group relative flex w-full min-h-11 flex-col overflow-hidden border-2 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-teal";
 
 function selectedRing(selected: boolean) {
   return selected
-    ? "ring-4 ring-teal ring-offset-4 ring-offset-cream"
-    : "hover:-translate-y-1 hover:shadow-xl hover:shadow-black/15";
+    ? "border-teal ring-4 ring-teal ring-offset-4 ring-offset-cream"
+    : "border-teal/20 hover:border-teal/50";
 }
 
 export default function DrinkFinderClient({
@@ -345,7 +345,7 @@ export default function DrinkFinderClient({
                 {flavour && (
                   <div
                     ref={resultRef}
-                    className="rise mt-10 grid scroll-mb-6 overflow-hidden rounded-[2rem] bg-teal text-cream sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+                    className="rise mt-10 grid scroll-mb-6 overflow-hidden border-2 border-teal bg-teal text-cream sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
                     aria-live="polite"
                   >
                     {base && (

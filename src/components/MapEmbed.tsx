@@ -3,7 +3,7 @@ import { LOCATION } from "@/lib/brand";
 export default function MapEmbed({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative min-h-[22rem] overflow-hidden rounded-[2rem] border-2 border-teal bg-teal/5 ${className}`}
+      className={`relative min-h-[22rem] overflow-hidden border-2 border-teal bg-teal/5 ${className}`}
     >
       <iframe
         title={`Map showing ${LOCATION.name}, Belfast`}

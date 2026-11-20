@@ -22,7 +22,7 @@ export default function RewardsClient({
 
   if (launchingSoon) {
     return (
-      <div className="rounded-[2rem] bg-teal p-8 text-cream sm:p-10">
+      <div className="border-2 border-teal bg-teal p-8 text-cream sm:p-10">
         <h2 className="font-display text-5xl leading-none">Launching soon</h2>
         <p className="mt-4 max-w-sm text-lg leading-relaxed text-cream/80">
           Ask at the till to join when it goes live. Online and in-store orders
@@ -70,7 +70,7 @@ export default function RewardsClient({
   const unit = result?.terminology?.other ?? "points";
 
   return (
-    <div className="rounded-[2rem] bg-teal p-6 text-cream sm:p-10">
+    <div className="border-2 border-teal bg-teal p-6 text-cream sm:p-10">
       <h2 className="font-display text-5xl leading-none">Join or check points</h2>
       <label htmlFor="rewards-phone" className="mt-6 block text-sm font-extrabold text-cream/85">
         UK mobile number
@@ -83,7 +83,7 @@ export default function RewardsClient({
         placeholder="07xxx xxxxxx"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-        className="mt-2 w-full rounded-full border-2 border-cream/30 bg-cream px-5 py-3.5 text-lg font-bold text-ink outline-none placeholder:font-normal placeholder:text-ink/40 focus:border-cream focus:ring-4 focus:ring-cream/30"
+        className="mt-2 w-full min-h-12 border-2 border-cream/30 bg-cream px-5 py-3.5 text-lg font-bold text-ink outline-none placeholder:font-normal placeholder:text-ink/40 focus:border-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
       />
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <button
@@ -105,22 +105,22 @@ export default function RewardsClient({
       </div>
 
       {error && (
-        <p className="mt-4 rounded-2xl bg-cream px-4 py-3 text-sm font-bold text-[#9b1c1c]" role="alert">
+        <p className="mt-4 border-2 border-cream bg-cream px-4 py-3 text-sm font-bold text-teal" role="alert">
           {error}
         </p>
       )}
 
       {result?.kind === "balance" && (
-        <div className="mt-6 rounded-[1.5rem] bg-cream p-6 text-teal" role="status">
+        <div className="mt-6 border-2 border-cream bg-cream p-6 text-teal" role="status">
           <p className="font-display text-5xl leading-none">
             {result.balance} {unit}
           </p>
           {result.rewardTiers && result.rewardTiers.length > 0 && (
-            <ul className="mt-4 space-y-2 text-base text-ink/80">
+            <ul className="mt-4 divide-y divide-teal/15 border-t border-teal/15 text-base text-ink/80">
               {result.rewardTiers.map((tier) => {
                 const reach = Math.max(0, tier.points - result.balance);
                 return (
-                  <li key={tier.name}>
+                  <li key={tier.name} className="py-2">
                     {reach === 0
                       ? `${tier.name}: ready to redeem`
                       : `${tier.name}: ${reach} ${unit} to go`}
@@ -133,7 +133,7 @@ export default function RewardsClient({
       )}
 
       {result?.kind === "joined" && (
-        <div className="mt-6 rounded-[1.5rem] bg-cream p-6 text-teal" role="status">
+        <div className="mt-6 border-2 border-cream bg-cream p-6 text-teal" role="status">
           <h3 className="font-display text-5xl leading-none">
             {result.alreadyMember ? "Welcome back." : "You're in."}
           </h3>

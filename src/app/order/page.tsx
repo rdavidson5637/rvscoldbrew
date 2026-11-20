@@ -111,7 +111,7 @@ export default function OrderPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="flex flex-col items-start justify-between gap-8 rounded-[2rem] bg-matcha p-8 text-matcha-ink sm:p-12 md:flex-row md:items-center">
+        <div className="flex flex-col items-start justify-between gap-8 border-2 border-matcha-ink bg-matcha p-8 text-matcha-ink sm:p-12 md:flex-row md:items-center">
           <div>
             <h2 className="font-display text-5xl leading-none sm:text-6xl">
               Not sure what to get?
@@ -123,7 +123,7 @@ export default function OrderPage() {
           </div>
           <Link
             href="/builder"
-            className="btn shrink-0 bg-matcha-ink text-matcha hover:bg-[#243a15] focus-visible:outline-matcha-ink"
+            className="btn shrink-0 bg-matcha-ink text-matcha hover:opacity-90 focus-visible:outline-matcha-ink"
           >
             Find your drink
           </Link>
