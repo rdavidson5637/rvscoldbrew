@@ -38,7 +38,7 @@ export default function Navbar() {
     pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <nav className="h-16 bg-[#141514] text-cream" aria-label="Main navigation">
+    <nav className="h-16 bg-ink text-cream" aria-label="Main navigation">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href="/"
@@ -107,7 +107,7 @@ export default function Navbar() {
 
       <div
         id="mobile-nav"
-        className={`fixed inset-x-0 bottom-0 top-[var(--header-h)] z-40 flex flex-col bg-[#141514] transition-[transform,visibility] duration-300 md:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-[var(--header-h)] z-40 flex flex-col bg-ink transition-[transform,visibility] duration-300 md:hidden ${
           menuOpen ? "visible translate-x-0" : "invisible translate-x-full"
         }`}
       >

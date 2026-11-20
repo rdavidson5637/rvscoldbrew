@@ -23,11 +23,11 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "RV's Cold Brew | Great Northern Mall, Belfast",
+    default: "RV's Cold Brew | Cold brew on tap, brewed in Belfast",
     template: "%s | RV's Cold Brew",
   },
   description:
-    "CoreBrew Coffee Base, nitro cold brew, and Okumidori matcha at Unit 11, Great Northern Mall, Belfast BT2 7GN. Order for collection or put cold brew on tap at your venue.",
+    "RV's Cold Brew brews fresh cold brew concentrate and nitro cold brew in Belfast and supplies it on tap to cafés, bars and coffee roasters, with the taps, delivery and line cleaning included.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -39,18 +39,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "RV's Cold Brew",
+    title: "RV's Cold Brew | Cold brew on tap, brewed in Belfast",
     description:
-      "Smooth craft cold brew & premium matcha. Born in Belfast. Collection at Unit 11.",
+      "Fresh cold brew concentrate and nitro cold brew on draft in Belfast. Taps, delivery and line cleaning included. Tasting room at Unit 11, Great Northern Mall.",
     locale: "en_GB",
     type: "website",
     siteName: "RV's Cold Brew",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RV's Cold Brew",
+    title: "RV's Cold Brew | Cold brew on tap, brewed in Belfast",
     description:
-      "Smooth craft cold brew & premium matcha. Born in Belfast.",
+      "Fresh cold brew concentrate and nitro cold brew on draft in Belfast. Taps, delivery and line cleaning included.",
   },
   manifest: "/manifest.webmanifest",
 };
@@ -73,7 +73,7 @@ export default function RootLayout({
           <JsonLd />
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:font-bold focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-[#0c343d] focus:px-4 focus:py-2 focus:text-[#fff2cc]"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-teal focus:px-4 focus:py-2 focus:font-bold focus:text-cream"
           >
             Skip to content
           </a>

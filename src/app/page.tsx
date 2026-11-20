@@ -7,7 +7,14 @@ import Marquee from "@/components/Marquee";
 import MenuItemRow from "@/components/MenuItemRow";
 import OpenStatus from "@/components/OpenStatus";
 import Sticker from "@/components/Sticker";
-import { CONTACT_EMAIL, IMAGES, LOCATION, OPENING_HOURS, VIDEOS } from "@/lib/brand";
+import {
+  CONTACT_EMAIL,
+  IMAGES,
+  LOCATION,
+  OPENING_HOURS,
+  TASTING_ROOM_CADENCE,
+  VIDEOS,
+} from "@/lib/brand";
 import { getMenu, type CatalogMenuItem } from "@/lib/catalog";
 
 export const revalidate = 300;
@@ -70,10 +77,10 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pt-14 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] md:items-center md:gap-6 md:pb-24 lg:pt-20">
           <div>
             {/* Each line stays whole: sized so the longest line fits the column at every width */}
-            <h1 className="font-display text-[clamp(2.75rem,14vw,4.5rem)] leading-[0.86] md:text-[clamp(3.5rem,7.6vw,6.4rem)]">
-              <span className="rise block whitespace-nowrap">Smooth cold brew.</span>
-              <span className="rise block whitespace-nowrap delay-100">Premium matcha.</span>
-              <span className="rise block whitespace-nowrap text-cream/55 delay-200">
+            <h1 className="font-display text-[clamp(2.5rem,11vw,4.5rem)] leading-[0.9] sm:text-[clamp(2.75rem,14vw,4.5rem)] sm:leading-[0.86] md:text-[clamp(3.5rem,7.6vw,6.4rem)]">
+              <span className="rise block sm:whitespace-nowrap">Smooth cold brew.</span>
+              <span className="rise block delay-100 sm:whitespace-nowrap">Premium matcha.</span>
+              <span className="rise block text-cream/55 delay-200 sm:whitespace-nowrap">
                 Born in Belfast.
               </span>
             </h1>
@@ -286,7 +293,7 @@ export default async function Home() {
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
                 We supply our cold brew concentrate and nitro cold brew on draft
                 to cafés, bars, restaurants, hotels and gyms across Northern
-                Ireland — and white-label brew for coffee roasters from 4 kegs a
+                Ireland, and white-label brew for coffee roasters from 4 kegs a
                 month. We install the taps, deliver the 19 L kegs and clean the
                 lines. You just pour.
               </p>
@@ -388,7 +395,10 @@ export default async function Home() {
             <h2 className="mt-2 font-display text-6xl leading-none sm:text-7xl lg:text-8xl">
               Come find us
             </h2>
-            <OpenStatus className="mt-5 text-base font-extrabold text-teal" />
+            <p className="mt-5 text-base font-extrabold text-teal">
+              {TASTING_ROOM_CADENCE}
+            </p>
+            <OpenStatus className="mt-2 text-base font-extrabold text-teal" />
             <address className="mt-6 text-xl not-italic leading-relaxed text-ink/85">
               {LOCATION.unit}, {LOCATION.name}
               <br />
@@ -397,11 +407,13 @@ export default async function Home() {
               {LOCATION.city}, {LOCATION.region}
             </address>
             <p className="mt-4 max-w-md text-base leading-relaxed text-ink/75">
-              Our tasting room at the front of our brewery serves our cold brew,
-              nitro cold brew, and Okumidori matcha every day. Venue owners are
-              welcome to book a demo.
+              Our tasting room at the front of our brewery serves our cold brew
+              and nitro every day. Venue owners are welcome to book a demo.
             </p>
-            <dl className="mt-8 max-w-sm border-t-2 border-teal">
+            <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.15em] text-teal/60">
+              Collection hours
+            </p>
+            <dl className="mt-2 max-w-sm border-t-2 border-teal">
               {OPENING_HOURS.map((row) => (
                 <div
                   key={row.days}

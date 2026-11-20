@@ -32,10 +32,9 @@ export default function Footer() {
                 RV&apos;s Cold Brew
               </p>
               <p className="mt-3 max-w-xs text-[0.95rem] leading-relaxed text-cream/70">
-                Fresh cold brew concentrate, nitro cold brew, and Okumidori
-                matcha — brewed in Belfast, served daily in our Unit 11 tasting
-                room and supplied on tap to hospitality venues across Northern
-                Ireland.
+                Fresh cold brew concentrate and nitro cold brew, brewed in
+                Belfast. Served daily in our Unit 11 tasting room and supplied
+                on tap to hospitality venues across Northern Ireland.
               </p>
               <p className="mt-3 text-[0.95rem]">
                 <a
@@ -73,7 +72,10 @@ export default function Footer() {
               <br />
               {LOCATION.city}, {LOCATION.region}
             </address>
-            <dl className="mt-4 space-y-1 text-[0.95rem]">
+            <p className="mt-4 text-xs font-extrabold uppercase tracking-[0.15em] text-cream/50">
+              Collection hours
+            </p>
+            <dl className="mt-2 space-y-1 text-[0.95rem]">
               {OPENING_HOURS.map((row) => (
                 <div key={row.days} className="flex max-w-[15rem] justify-between gap-4">
                   <dt className="font-bold">{row.days}</dt>

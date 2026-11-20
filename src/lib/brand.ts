@@ -3,7 +3,7 @@ export const SPOTIFY_PLAYLIST_ID =
   process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID ?? "37i9dQZF1DX4sWSpwq3LiO";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rvscoldbrew.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rvscoldbrew.co.uk";
 
 export const LOCATION = {
   unit: "Unit 11",
@@ -27,6 +27,14 @@ export const COMPANY_LEGAL = {
   companyNumber: "NI737247",
   line: "RV's Cold Brew Ltd · Registered in Northern Ireland, company number NI737247",
 } as const;
+
+/**
+ * Live Wix site (rvscoldbrew.co.uk, Nov 2026) only says the tasting room is open
+ * "every day" - no clock times. Clock rows below are retail/collection hours already
+ * in this repo (Vercel retail site). TODO Ryan: confirm whether tasting-room and
+ * collection hours match, and whether Sunday is open.
+ */
+export const TASTING_ROOM_CADENCE = "Open every day";
 
 export const OPENING_HOURS = [
   { days: "Mon–Fri", hours: "7:00 – 17:00" },

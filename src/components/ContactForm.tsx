@@ -92,9 +92,9 @@ export default function ContactForm() {
         role="status"
         aria-live="polite"
       >
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#0c343d]">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-teal">
           <svg
-            className="h-8 w-8 text-[#fff2cc]"
+            className="h-8 w-8 text-cream"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -108,11 +108,12 @@ export default function ContactForm() {
             />
           </svg>
         </div>
-        <h2 className="font-display text-4xl text-[#141514]">
+        <h2 className="font-display text-4xl text-ink">
           Enquiry sent
         </h2>
-        <p className="mt-4 text-[#141514]/75">
-          Thanks. We&apos;ll get back to you within 48 hours.
+        {/* TODO Ryan: confirm response-time promise before publishing a specific SLA. */}
+        <p className="mt-4 text-ink/75">
+          Thanks. We&apos;ll get back to you soon.
         </p>
         <button
           type="button"

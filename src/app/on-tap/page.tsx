@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import DraftTapIllustration from "@/components/DraftTapIllustration";
 import Marquee from "@/components/Marquee";
-import OpenStatus from "@/components/OpenStatus";
 import Sticker from "@/components/Sticker";
-import { CONTACT_EMAIL, LOCATION, OPENING_HOURS } from "@/lib/brand";
+import { CONTACT_EMAIL, LOCATION, TASTING_ROOM_CADENCE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Cold Brew on Tap | Wholesale & Roasters",
@@ -241,7 +240,7 @@ export default function OnTapPage() {
               </ul>
             </article>
 
-            <article className="flex flex-col rounded-[2rem] border-2 border-cream/30 bg-[#061d23] p-8 sm:p-10">
+            <article className="flex flex-col rounded-[2rem] border-2 border-cream/30 bg-teal-deep p-8 sm:p-10">
               <span className="w-fit rounded-full bg-cream text-teal px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider">
                 Tap two
               </span>
@@ -402,7 +401,10 @@ export default function OnTapPage() {
               <h2 className="mt-3 font-display text-5xl leading-none sm:text-6xl">
                 Come and taste it from the tap.
               </h2>
-              <OpenStatus className="mt-4 text-sm font-extrabold text-cream" />
+              <p className="mt-4 text-sm font-extrabold text-cream">
+                {TASTING_ROOM_CADENCE}
+              </p>
+              {/* TODO Ryan: live Wix page only says "every day". Confirm clock hours before showing Mon–Sun times or live Open/Closed here. */}
               <address className="mt-5 text-lg not-italic leading-relaxed text-cream/85">
                 <strong className="text-cream">RV&apos;s Cold Brew Coffee</strong>
                 <br />
@@ -415,17 +417,6 @@ export default function OnTapPage() {
                 brew and nitro every day. Venue owners are welcome to book a
                 demo.
               </p>
-              <dl className="mt-6 max-w-xs border-t border-cream/20 pt-4 text-sm">
-                {OPENING_HOURS.map((row) => (
-                  <div
-                    key={row.days}
-                    className="flex justify-between gap-4 py-1"
-                  >
-                    <dt className="font-bold">{row.days}</dt>
-                    <dd className="tabular-nums text-cream/75">{row.hours}</dd>
-                  </div>
-                ))}
-              </dl>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <a

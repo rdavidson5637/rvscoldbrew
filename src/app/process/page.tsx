@@ -10,20 +10,20 @@ import { IMAGES, VIDEOS } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "Our Process",
   description:
-    "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+    "Specialty Brazil, Peru and Guatemala blend, roasted in Northern Ireland, cold brewed in Belfast. Steep, recover, filter, test and keg - every batch tested, every keg traceable.",
   alternates: {
     canonical: "/process",
   },
   openGraph: {
     title: "Our Process | RV's Cold Brew",
     description:
-      "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+      "Specialty Brazil, Peru and Guatemala blend, roasted in Northern Ireland, cold brewed in Belfast. Every batch tested, every keg traceable.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Our Process | RV's Cold Brew",
     description:
-      "Three steps, twenty-four hours, one smooth result. See how RV's Cold Brew filters out bitterness through cold extraction.",
+      "Specialty Brazil, Peru and Guatemala blend, roasted in Northern Ireland, cold brewed in Belfast. Every batch tested, every keg traceable.",
   },
 };
 
@@ -32,7 +32,7 @@ const TIMELINE_STEPS = [
     number: "01",
     image: IMAGES.processBlend,
     title: "The blend",
-    subtitle: "Brazil, Peru & Guatemala — roasted in Northern Ireland",
+    subtitle: "Brazil, Peru & Guatemala - roasted in Northern Ireland",
     description:
       "Our specialty blend of Brazil, Peru and Guatemala coffee is roasted in Northern Ireland by Strangford Coffee Roastery for one goal: maximum smoothness once steeped cold.",
   },
@@ -50,7 +50,7 @@ const TIMELINE_STEPS = [
     title: "Tested, kegged & poured",
     subtitle: "Strength (TDS) & pH checked on every batch",
     description:
-      "Every batch is lab-checked for TDS and pH before going into sanitised, batch-coded 19 L stainless steel kegs and cans — powering our Unit 11 tasting room and hospitality taps across NI.",
+      "Every batch is lab-checked for TDS and pH before going into sanitised, batch-coded 19 L stainless steel kegs and cans, powering our Unit 11 tasting room and hospitality taps across NI.",
   },
 ];
 

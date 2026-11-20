@@ -3,13 +3,18 @@ import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import OpenStatus from "@/components/OpenStatus";
 import PageHeader from "@/components/PageHeader";
-import { CONTACT_EMAIL, LOCATION, OPENING_HOURS } from "@/lib/brand";
+import {
+  CONTACT_EMAIL,
+  LOCATION,
+  OPENING_HOURS,
+  TASTING_ROOM_CADENCE,
+} from "@/lib/brand";
 
 const OFFERS = [
-  "Cold brew & nitro on tap — £0 equipment to buy, taps & line cleaning included",
-  "White-label cold brew kegging for coffee roasters (from 4 kegs/month)",
-  "Wholesale minimum orders from £100",
-  "Event catering for 20+ guests & corporate accounts",
+  "Cold brew and nitro on tap - £0 equipment to buy, taps and line cleaning included",
+  "White-label cold brew kegging for coffee roasters (from 4 kegs a month)",
+  // TODO Ryan: confirm wholesale minimums, event catering capacity, and any other offer lines before publishing invented numbers.
+  "Wholesale, events and corporate enquiries",
 ];
 
 export default function ContactPage() {
@@ -82,7 +87,10 @@ export default function ContactPage() {
               <h2 className="mt-2 font-display text-4xl leading-none">
                 Come and taste it from the tap
               </h2>
-              <OpenStatus className="mt-4 font-extrabold" />
+              <p className="mt-4 text-sm font-extrabold text-cream">
+                {TASTING_ROOM_CADENCE}
+              </p>
+              <OpenStatus className="mt-2 font-extrabold" />
               <address className="mt-4 text-lg not-italic leading-relaxed text-cream/85">
                 {LOCATION.unit}, {LOCATION.name}
                 <br />
@@ -95,7 +103,10 @@ export default function ContactPage() {
                 brew and nitro every day. Venue owners are welcome to book a
                 demo.
               </p>
-              <dl className="mt-5 space-y-1">
+              <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.15em] text-cream/55">
+                Collection hours
+              </p>
+              <dl className="mt-2 space-y-1">
                 {OPENING_HOURS.map((row) => (
                   <div key={row.days} className="flex max-w-[16rem] justify-between gap-4">
                     <dt className="font-bold">{row.days}</dt>
