@@ -3,18 +3,38 @@ export const SPOTIFY_PLAYLIST_ID =
   process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID ?? "37i9dQZF1DX4sWSpwq3LiO";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rvscoldbrew.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rvscoldbrew.co.uk";
 
 export const LOCATION = {
   unit: "Unit 11",
   name: "Great Northern Mall",
+  street: "48–52 Great Victoria Street",
   detail: "Near Grand Central Station",
-  city: "Belfast, Northern Ireland",
-  full: "Unit 11, Great Northern Mall, Belfast — near Grand Central Station",
-  mapsQuery: "Great+Northern+Mall,+Belfast,+Northern+Ireland",
+  postcode: "BT2 7GN",
+  city: "Belfast, BT2 7GN",
+  region: "Northern Ireland",
+  full: "Unit 11, Great Northern Mall, Belfast BT2 7GN, near Grand Central Station",
+  mapsQuery: "Great+Northern+Mall,+Belfast+BT2+7GN,+Northern+Ireland",
   mapsDirectionsUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast,+Northern+Ireland",
+    "https://www.google.com/maps/dir/?api=1&destination=Great+Northern+Mall,+Belfast+BT2+7GN,+Northern+Ireland",
 } as const;
+
+export const CONTACT_EMAIL = "info@rvscoldbrew.co.uk";
+
+export const COMPANY_LEGAL = {
+  name: "RV's Cold Brew Ltd",
+  jurisdiction: "Registered in Northern Ireland",
+  companyNumber: "NI737247",
+  line: "RV's Cold Brew Ltd · Registered in Northern Ireland, company number NI737247",
+} as const;
+
+/**
+ * Live Wix site (rvscoldbrew.co.uk, Nov 2026) only says the tasting room is open
+ * "every day" - no clock times. Clock rows below are retail/collection hours already
+ * in this repo (Vercel retail site). TODO Ryan: confirm whether tasting-room and
+ * collection hours match, and whether Sunday is open.
+ */
+export const TASTING_ROOM_CADENCE = "Open every day";
 
 export const OPENING_HOURS = [
   { days: "Mon–Fri", hours: "7:00 – 17:00" },
@@ -22,8 +42,22 @@ export const OPENING_HOURS = [
   { days: "Sun", hours: "Closed" },
 ] as const;
 
+/**
+ * Machine-readable weekly hours (Europe/London), index 0 = Sunday.
+ * Minutes from midnight. Keep in sync with OPENING_HOURS and JsonLd.
+ */
+export const WEEKLY_HOURS: ReadonlyArray<{ open: number; close: number } | null> = [
+  null,
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 7 * 60, close: 17 * 60 },
+  { open: 8 * 60, close: 14 * 60 },
+];
+
 export const BRAND_TAGLINE =
-  "Espresso-strength CoreBrew Coffee Base — powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
+  "Espresso-strength CoreBrew Coffee Base, powering premium hot and cold drinks, plus single cultivar Okumidori Matcha.";
 
 export const PRODUCT_COPY =
   "All the caffeine, zero bitterness. 100% brewed in Belfast.";

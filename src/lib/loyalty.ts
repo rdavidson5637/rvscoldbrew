@@ -1,6 +1,7 @@
 import "server-only";
 
 import { randomUUID } from "crypto";
+import { toE164UK } from "@/lib/phone";
 import {
   getSquareClient,
   getSquareLocationId,
@@ -121,6 +122,16 @@ export async function accumulatePointsForOrder(orderId: string): Promise<void> {
         limit: 1,
       });
       accountId = search.loyaltyAccounts?.[0]?.id;
+    }
+
+    if (!accountId) {
+      const rawPhone =
+        order.fulfillments?.[0]?.pickupDetails?.recipient?.phoneNumber;
+      const phoneE164 = rawPhone ? toE164UK(rawPhone) : null;
+      if (phoneE164) {
+        const byPhone = await findAccountByPhone(phoneE164);
+        accountId = byPhone?.id;
+      }
     }
 
     if (!accountId) {

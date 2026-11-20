@@ -1,126 +1,124 @@
+import Link from "next/link";
+import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
-import { LOCATION, OPENING_HOURS } from "@/lib/brand";
+import PageHeader from "@/components/PageHeader";
+import {
+  CONTACT_EMAIL,
+  LOCATION,
+  OPENING_HOURS,
+  TASTING_ROOM_CADENCE,
+} from "@/lib/brand";
+
+const OFFERS = [
+  "Cold brew and nitro on tap - £0 equipment to buy, taps and line cleaning included",
+  "White-label cold brew kegging for coffee roasters (from 4 kegs a month)",
+  // TODO Ryan: confirm wholesale minimums, event catering capacity, and any other offer lines before publishing invented numbers.
+  "Wholesale, events and corporate enquiries",
+];
 
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-[#0c343d] px-4 py-20 text-[#fff2cc] sm:px-6 lg:px-8 lg:py-28">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#fff2cc]/70">
-            Get in Touch
+      <PageHeader
+        title="On tap, wholesale & enquiries"
+        intro={
+          <p>
+            Put cold brew on tap at your venue, talk to us about white-label
+            roaster kegs, or enquire about events and wholesale. Email{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}?subject=Cold%20brew%20on%20tap%20enquiry`}
+              className="underline decoration-2 underline-offset-4"
+            >
+              {CONTACT_EMAIL}
+            </a>{" "}
+            or use the form below.
           </p>
-          <h1 className="mt-3 font-display text-5xl leading-tight sm:text-6xl lg:text-7xl">
-            Business Enquiries
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#fff2cc]/85 sm:text-lg">
-            Interested in wholesale, events, corporate orders, or collaborations?
-            We&apos;d love to hear from you. Fill out the form below and
-            we&apos;ll get back to you within 48 hours.
-          </p>
-        </div>
-      </section>
+        }
+        actions={
+          <Link href="/on-tap" className="btn-ghost-cream">
+            See how On Tap works
+          </Link>
+        }
+      />
 
-      <section className="bg-[#fff2cc] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-cream px-4 py-16 sm:px-6 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-5 lg:gap-16">
           <div className="lg:col-span-3">
-            <ContactForm />
+            <Suspense fallback={null}>
+              <ContactForm />
+            </Suspense>
           </div>
 
-          <aside className="space-y-6 lg:col-span-2">
-            <div className="rounded-2xl bg-[#0c343d] p-8 text-[#fff2cc]">
-              <h2 className="font-display text-3xl">Visit Us</h2>
-              <address className="mt-4 space-y-3 text-sm not-italic leading-relaxed text-[#fff2cc]/85">
-                <p>
-                  {LOCATION.unit}, {LOCATION.name}
-                  <br />
-                  {LOCATION.detail}
-                  <br />
-                  {LOCATION.city}
-                </p>
+          <aside className="space-y-10 text-teal lg:col-span-2">
+            <div>
+              <h2 className="font-display text-4xl leading-none">What we can do</h2>
+              <ul className="mt-5 border-t-2 border-teal">
+                {OFFERS.map((offer) => (
+                  <li
+                    key={offer}
+                    className="border-b-2 border-dotted border-teal/20 py-3.5 text-lg font-bold leading-snug"
+                  >
+                    {offer}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <a
+                  href={`mailto:${CONTACT_EMAIL}?subject=Book%20a%20demo&body=Hi%20RV%27s%20Cold%20Brew%2C%0A%0AI%27d%20like%20to%20book%20a%20demo%20of%20your%20cold%20brew%20on%20tap.%0A%0AVenue%20name%3A%0ALocation%3A%0APhone%3A%0ABest%20days%2Ftimes%3A%0A%0AThanks`}
+                  className="btn-primary"
+                >
+                  Book a demo
+                </a>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}?subject=Cold%20brew%20on%20tap%20enquiry`}
+                  className="link-under text-teal"
+                >
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
+            </div>
+
+            <div className="border-2 border-teal bg-teal p-8 text-cream">
+              <p className="kicker text-cream/65">
+                Tasting room &amp; showroom
+              </p>
+              <h2 className="mt-2 font-display text-4xl leading-none">
+                Come and taste it from the tap
+              </h2>
+              <p className="mt-4 text-sm font-extrabold text-cream">
+                {TASTING_ROOM_CADENCE}
+              </p>
+              <address className="mt-4 text-lg not-italic leading-relaxed text-cream/85">
+                {LOCATION.unit}, {LOCATION.name}
+                <br />
+                {LOCATION.detail}
+                <br />
+                {LOCATION.city}, {LOCATION.region}
               </address>
+              <p className="mt-3 text-sm leading-relaxed text-cream/80">
+                Our tasting room at the front of our brewery serves our cold
+                brew and nitro every day. Venue owners are welcome to book a
+                demo.
+              </p>
+              <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.15em] text-cream/55">
+                Collection hours
+              </p>
+              <dl className="mt-2 space-y-1">
+                {OPENING_HOURS.map((row) => (
+                  <div key={row.days} className="flex max-w-[16rem] justify-between gap-4">
+                    <dt className="font-bold">{row.days}</dt>
+                    <dd className="tabular-nums text-cream/80">{row.hours}</dd>
+                  </div>
+                ))}
+              </dl>
               <a
                 href={LOCATION.mapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm font-semibold underline-offset-2 hover:underline"
+                className="link-under mt-6 inline-block text-cream"
               >
-                Get directions →
+                Get directions
               </a>
-            </div>
-
-            <div className="rounded-2xl bg-[#0c343d] p-8 text-[#fff2cc]">
-              <h2 className="font-display text-3xl">Opening Hours</h2>
-              <div className="mt-4 space-y-1 text-sm leading-relaxed text-[#fff2cc]/85">
-                {OPENING_HOURS.map((row) => (
-                  <p key={row.days}>
-                    <span className="text-[#fff2cc]">{row.days}</span> ·{" "}
-                    {row.hours}
-                  </p>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border-2 border-[#0c343d]/10 bg-white p-8">
-              <h2 className="font-display text-3xl text-[#141514]">
-                Quick Response
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#141514]/75">
-                We typically respond to all enquiries within 48 hours during
-                business days.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-[#141514]/75">
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#0c343d]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>Wholesale minimum orders from £100</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#0c343d]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>Event catering for 20+ guests</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#0c343d]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>Corporate accounts available</span>
-                </li>
-              </ul>
             </div>
           </aside>
         </div>

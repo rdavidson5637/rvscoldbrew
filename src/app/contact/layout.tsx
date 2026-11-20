@@ -3,20 +3,20 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact & Enquiries",
   description:
-    "Get in touch with RV's Cold Brew for wholesale, events, corporate orders, press enquiries, or general questions. We typically respond within 48 hours.",
+    "Book a demo or enquire about cold brew on tap, white-label kegging for roasters, wholesale and events. Email info@rvscoldbrew.co.uk or use the form. Unit 11, Great Northern Mall, Belfast BT2 7GN.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
     title: "Contact & Enquiries | RV's Cold Brew",
     description:
-      "Get in touch with RV's Cold Brew for wholesale, events, corporate orders, press enquiries, or general questions. We typically respond within 48 hours.",
+      "Book a demo or enquire about cold brew on tap, white-label kegging for roasters, wholesale and events. Email info@rvscoldbrew.co.uk.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact & Enquiries | RV's Cold Brew",
     description:
-      "Get in touch with RV's Cold Brew for wholesale, events, corporate orders, press enquiries, or general questions. We typically respond within 48 hours.",
+      "Book a demo or enquire about cold brew on tap, white-label kegging for roasters, wholesale and events. Email info@rvscoldbrew.co.uk.",
   },
 };
 

@@ -4,13 +4,38 @@
 
 :root {
   --teal: #0c343d;
+  --teal-deep: #08262d;
   --cream: #fff2cc;
   --black: #141514;
+  /* Matcha content only. Pale latte green, with a dark leaf for text/marks. */
+  --matcha: #d6e4b4;
+  --matcha-ink: #2f4a1c;
+  /* StickyBar min-h-11 (2.75rem) + Navbar h-16 (4rem) */
+  --header-h: 6.75rem;
+  /* Type scale (~1.25). Use these instead of one-off sizes where practical. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-display-sm: clamp(2.5rem, 8vw, 3.5rem);
+  --text-display: clamp(3rem, 9vw, 5rem);
+  --text-display-lg: clamp(3.5rem, 10vw, 7rem);
+  --leading-tight: 1.05;
+  --leading-snug: 1.15;
+  --leading-body: 1.6;
+  --measure: 42rem;
+  --space-section: clamp(4.5rem, 8vw, 7rem);
+  --radius-frame: 1.5rem;
+  --radius-panel: 0.25rem;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    overflow-x: clip;
   }
 
   body {
@@ -19,6 +44,8 @@
     color: var(--black);
     font-family: var(--font-body), "Nunito", sans-serif;
     position: relative;
+    overflow-x: clip;
+    line-height: var(--leading-body);
   }
 
   body::after {
@@ -41,13 +68,25 @@
   h5,
   h6 {
     font-family: var(--font-display), "Bebas Neue", sans-serif;
-    letter-spacing: 0.02em;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: var(--leading-tight);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold uppercase tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-extrabold normal-case tracking-normal transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
@@ -56,9 +95,8 @@
     color: var(--cream);
   }
 
-  .btn-primary:hover {
-    filter: brightness(1.1);
-    transform: scale(1.02);
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--teal-deep);
   }
 
   .btn-primary:focus-visible {
@@ -71,9 +109,8 @@
     color: var(--teal);
   }
 
-  .btn-cream:hover {
-    filter: brightness(0.97);
-    transform: scale(1.02);
+  .btn-cream:hover:not(:disabled) {
+    background-color: #fff8e2;
   }
 
   .btn-cream:focus-visible {
@@ -86,13 +123,86 @@
     color: var(--teal);
   }
 
-  .btn-outline:hover {
+  .btn-outline:hover:not(:disabled) {
     background-color: var(--teal);
     color: var(--cream);
   }
 
   .btn-outline:focus-visible {
     outline-color: var(--teal);
+  }
+
+  .btn-ghost-cream {
+    @apply btn border-2 bg-transparent;
+    border-color: rgb(255 242 204 / 0.45);
+    color: var(--cream);
+  }
+
+  .btn-ghost-cream:hover:not(:disabled) {
+    border-color: var(--cream);
+    background-color: rgb(255 242 204 / 0.08);
+  }
+
+  .btn-ghost-cream:focus-visible {
+    outline-color: var(--cream);
+  }
+
+  /* Text link with a thick underline that fills on hover */
+  .link-under {
+    @apply font-extrabold underline decoration-2 underline-offset-[6px] transition-colors;
+    text-decoration-color: currentColor;
+  }
+
+  .link-under:hover {
+    text-decoration-thickness: 4px;
+  }
+
+  /* Editorial ruled list - preferred over soft card grids */
+  .ruled-list > * + * {
+    border-top: 2px dotted color-mix(in srgb, currentColor 20%, transparent);
+  }
+
+  .ruled-row {
+    @apply flex min-h-11 items-start justify-between gap-4 py-3.5;
+  }
+
+  .section-pad {
+    padding-block: var(--space-section);
+  }
+
+  .measure {
+    max-width: var(--measure);
+  }
+
+  .kicker {
+    @apply text-xs font-extrabold uppercase tracking-[0.2em];
+  }
+
+  .panel-flat {
+    border-radius: var(--radius-panel);
+  }
+}
+
+/* Hero load sequence: the one orchestrated motion moment on the site */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-frame {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotate(var(--tilt, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--tilt, 0deg));
   }
 }
 
@@ -137,6 +247,21 @@
 }
 
 @layer utilities {
+  .rise {
+    opacity: 0;
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+
+  .rise-frame {
+    opacity: 0;
+    transform: rotate(var(--tilt, 0deg));
+    animation: rise-frame 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+
+  .tilt {
+    transform: rotate(var(--tilt, 0deg));
+  }
+
   .animate-fade-up {
     animation: fadeUp 0.7s ease-out forwards;
   }
@@ -205,6 +330,70 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Dotted leader between a menu item name and its price */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    border-bottom: 2px dotted currentColor;
+    opacity: 0.3;
+    transform: translateY(-0.3em);
+  }
+
+  /* Ticker band. The track holds the items twice, so -50% loops seamlessly. */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-speed, 38s) linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /*
+   * Scroll reveal. Only active once RevealOnScroll has run (html.reveal-ready),
+   * so without JS everything is visible as normal.
+   */
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  .reveal-ready [data-reveal] {
+    transition:
+      opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes tap-drip {
+  0%,
+  55% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  62% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160px);
+    opacity: 0;
+  }
+}
+
+.tap-drip {
+  animation: tap-drip 2.8s ease-in infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -212,11 +401,23 @@
     scroll-behavior: auto;
   }
 
+  .marquee-track,
+  .tap-drip {
+    animation: none !important;
+    opacity: 0;
+  }
+
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
 }

@@ -32,6 +32,7 @@ type CartContextValue = {
 };
 
 const CART_STORAGE_KEY = "rvs-cart";
+const GUEST_STORAGE_KEY = "rvs-guest";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
@@ -163,7 +164,38 @@ function CartDrawer() {
   } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pickupName, setPickupName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
   const asideRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(GUEST_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as {
+          pickupName?: string;
+          phone?: string;
+        };
+        if (parsed.pickupName) setPickupName(parsed.pickupName);
+        if (parsed.phone) setPhone(parsed.phone);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(
+        GUEST_STORAGE_KEY,
+        JSON.stringify({ pickupName, phone }),
+      );
+    } catch {
+      /* ignore */
+    }
+  }, [pickupName, phone, hydrated]);
 
   useEffect(() => {
     if (!open || !asideRef.current) return;
@@ -205,6 +237,9 @@ function CartDrawer() {
             variationId: i.variationId,
             quantity: i.quantity,
           })),
+          pickupName: pickupName.trim() || undefined,
+          phone: phone.trim() || undefined,
+          note: note.trim() || undefined,
         }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
@@ -267,14 +302,14 @@ function CartDrawer() {
           {items.length === 0 ? (
             <div className="py-12 text-center">
               <p className="text-sm text-[#141514]/60">
-                Your order is empty — browse the menu.
+                Nothing in your order yet.
               </p>
               <Link
                 href="/menu"
                 onClick={() => setOpen(false)}
                 className="mt-4 inline-block text-sm font-semibold text-[#0c343d] hover:underline"
               >
-                See the Menu →
+                Browse the menu
               </Link>
             </div>
           ) : (
@@ -326,6 +361,69 @@ function CartDrawer() {
               ))}
             </ul>
           )}
+          {items.length > 0 && (
+            <div className="mt-5 space-y-3 rounded-xl bg-white p-4 shadow-sm">
+              <div>
+                <label
+                  htmlFor="cart-pickup-name"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  Name for collection
+                </label>
+                <input
+                  id="cart-pickup-name"
+                  type="text"
+                  autoComplete="name"
+                  maxLength={80}
+                  value={pickupName}
+                  onChange={(e) => setPickupName(e.target.value)}
+                  placeholder="Your name"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="cart-rewards-phone"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  UK mobile{" "}
+                  <span className="font-normal normal-case text-[#141514]/55">
+                    (optional — earns RV&apos;s Rewards points)
+                  </span>
+                </label>
+                <input
+                  id="cart-rewards-phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="07xxx xxxxxx"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="cart-order-note"
+                  className="block text-xs font-extrabold uppercase tracking-wide text-[#0c343d]"
+                >
+                  Order notes{" "}
+                  <span className="font-normal normal-case text-[#141514]/55">
+                    (optional — e.g. oat milk)
+                  </span>
+                </label>
+                <input
+                  id="cart-order-note"
+                  type="text"
+                  maxLength={200}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Milk preference or note for the barista"
+                  className="mt-1 w-full rounded-lg border border-[#0c343d]/20 bg-[#fff2cc]/30 px-3 py-2 text-sm text-[#141514] outline-none focus:border-[#0c343d]"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="border-t border-[#0c343d]/10 px-6 py-6">
@@ -360,7 +458,7 @@ function CartDrawer() {
             {loading ? "Redirecting…" : "Pay & Collect"}
           </button>
           <p className="mt-3 text-center text-xs text-[#141514]/50">
-            Collection only at Unit 11, Great Northern Mall.
+            You pay on Square, then collect at Unit 11, Great Northern Mall.
           </p>
         </div>
       </aside>
@@ -368,19 +466,27 @@ function CartDrawer() {
   );
 }
 
-export function CartButton() {
+export function CartButton({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const { count, hydrated, setOpen } = useCart();
+  const shown = hydrated ? count : 0;
   return (
     <button
       type="button"
       onClick={() => setOpen(true)}
-      className="btn-cream relative shrink-0 normal-case"
-      aria-label={`Open order, ${hydrated ? count : 0} items`}
+      className={`relative inline-flex min-h-12 min-w-12 shrink-0 items-center justify-center rounded-full transition-colors ${
+        tone === "dark"
+          ? "text-cream hover:bg-white/10"
+          : "text-teal hover:bg-teal/10"
+      }`}
+      aria-label={`Your order, ${shown} item${shown === 1 ? "" : "s"}`}
     >
-      Order
-      {hydrated && count > 0 && (
-        <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#141514] text-xs font-bold text-[#fff2cc]">
-          {count}
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 8h12l-1 12H7L6 8z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 8V6a3 3 0 016 0v2" />
+      </svg>
+      {shown > 0 && (
+        <span className="absolute right-0.5 top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-cream px-1 text-[0.7rem] font-extrabold text-teal ring-2 ring-[#141514]">
+          {shown}
         </span>
       )}
     </button>

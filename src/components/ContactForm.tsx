@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, FormEvent, useEffect } from "react";
+import { CONTACT_EMAIL } from "@/lib/brand";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 const enquiryTypes = [
   { value: "", label: "Select enquiry type" },
+  { value: "on-tap", label: "Cold Brew on Tap (Venue Demo / Trial Keg)" },
+  { value: "white-label", label: "White-Label Brewing (For Coffee Roasters)" },
   { value: "wholesale", label: "Wholesale" },
   { value: "events", label: "Events & Catering" },
   { value: "corporate", label: "Corporate Orders" },
@@ -17,23 +21,42 @@ const enquiryTypes = [
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
+  const searchParams = useSearchParams();
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [enquiryType, setEnquiryType] = useState("");
+
+  useEffect(() => {
+    const param = searchParams.get("type");
+    if (param && enquiryTypes.some((t) => t.value === param)) {
+      setEnquiryType(param);
+    }
+  }, [searchParams]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    if (!FORMSPREE_ENDPOINT) {
-      setStatus("error");
-      setErrorMessage("Contact form is not configured. Please try again later.");
-      return;
-    }
-    
-    setStatus("submitting");
-    setErrorMessage("");
-
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    if (!FORMSPREE_ENDPOINT) {
+      const name = String(formData.get("name") || "");
+      const email = String(formData.get("email") || "");
+      const phone = String(formData.get("phone") || "");
+      const company = String(formData.get("company") || "");
+      const type = String(formData.get("enquiry_type") || "Enquiry");
+      const message = String(formData.get("message") || "");
+      const subject = `RV's Cold Brew Enquiry: ${type}${company ? ` (${company})` : ""}`;
+      const body = `Name: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ""}${company ? `\nVenue / Company: ${company}` : ""}\nEnquiry Type: ${type}\n\n${message}`;
+      const a = document.createElement("a");
+      a.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
 
     try {
       const response = await fetch(
@@ -65,13 +88,13 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div 
-        className="rounded-2xl border-2 border-[#0c343d]/20 bg-white p-8 text-center sm:p-12"
+        className="border-2 border-teal bg-cream p-8 text-center sm:p-12"
         role="status"
         aria-live="polite"
       >
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#0c343d]">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-teal">
           <svg
-            className="h-8 w-8 text-[#fff2cc]"
+            className="h-8 w-8 text-cream"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -85,18 +108,19 @@ export default function ContactForm() {
             />
           </svg>
         </div>
-        <h2 className="font-display text-4xl text-[#141514]">
-          Message Sent
+        <h2 className="font-display text-4xl text-ink">
+          Enquiry sent
         </h2>
-        <p className="mt-4 text-[#141514]/75">
-          Thanks for reaching out! We&apos;ll be in touch within 48 hours.
+        {/* TODO Ryan: confirm response-time promise before publishing a specific SLA. */}
+        <p className="mt-4 text-ink/75">
+          Thanks. We&apos;ll get back to you soon.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="btn-primary mt-8 normal-case"
         >
-          Send Another Message
+          Send another
         </button>
       </div>
     );
@@ -105,15 +129,15 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-2xl border-2 border-[#0c343d]/10 bg-white p-8 shadow-sm sm:p-10"
+      className="space-y-6 border-2 border-teal bg-cream p-6 sm:p-10"
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Full Name <span className="text-red-600">*</span>
+            Full name <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -121,7 +145,7 @@ export default function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="Your name"
           />
         </div>
@@ -129,9 +153,9 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Email Address <span className="text-red-600">*</span>
+            Email <span className="text-red-600">*</span>
           </label>
           <input
             type="email"
@@ -139,7 +163,7 @@ export default function ContactForm() {
             name="email"
             required
             autoComplete="email"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="you@example.com"
           />
         </div>
@@ -149,10 +173,10 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Phone Number{" "}
-            <span className="font-normal text-[#141514]/50">
+            Phone{" "}
+            <span className="font-normal text-ink/50">
               (optional)
             </span>
           </label>
@@ -161,7 +185,7 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             autoComplete="tel"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="+44 7XXX XXXXXX"
           />
         </div>
@@ -169,10 +193,10 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="company"
-            className="block text-sm font-medium text-[#141514]"
+            className="block text-sm font-extrabold text-teal"
           >
-            Company / Organisation{" "}
-            <span className="font-normal text-[#141514]/50">
+            Company or organisation{" "}
+            <span className="font-normal text-ink/50">
               (optional)
             </span>
           </label>
@@ -181,7 +205,7 @@ export default function ContactForm() {
             id="company"
             name="company"
             autoComplete="organization"
-            className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+            className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
             placeholder="Your company name"
           />
         </div>
@@ -190,15 +214,17 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="enquiry_type"
-          className="block text-sm font-medium text-[#141514]"
+          className="block text-sm font-extrabold text-teal"
         >
-          Enquiry Type <span className="text-red-600">*</span>
+          Enquiry type <span className="text-red-600">*</span>
         </label>
         <select
           id="enquiry_type"
           name="enquiry_type"
           required
-          className="mt-2 block w-full rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
+          value={enquiryType}
+          onChange={(e) => setEnquiryType(e.target.value)}
+          className="mt-2 block w-full min-h-12 border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink transition-colors focus:border-teal focus:outline-none focus:ring-0"
         >
           {enquiryTypes.map((type) => (
             <option key={type.value} value={type.value}>
@@ -211,7 +237,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-[#141514]"
+          className="block text-sm font-extrabold text-teal"
         >
           Message <span className="text-red-600">*</span>
         </label>
@@ -220,8 +246,8 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 block w-full resize-none rounded-lg border-2 border-[#0c343d]/20 bg-[#fff2cc]/30 px-4 py-3 text-[#141514] placeholder-[#141514]/40 transition-colors focus:border-[#0c343d] focus:outline-none focus:ring-0"
-          placeholder="Tell us about your enquiry..."
+          className="mt-2 block w-full resize-none border-2 border-teal/25 bg-white/60 px-4 py-3.5 text-ink placeholder:text-ink/40 transition-colors focus:border-teal focus:outline-none focus:ring-0"
+          placeholder="What do you need, and when?"
         />
       </div>
 
@@ -265,13 +291,12 @@ export default function ContactForm() {
             Sending...
           </span>
         ) : (
-          "Send Message"
+          "Send enquiry"
         )}
       </button>
 
-      <p className="text-center text-xs text-[#141514]/50">
-        By submitting this form, you agree to our privacy policy. We
-        will only use your information to respond to your enquiry.
+      <p className="text-center text-xs text-ink/50">
+        We only use your details to reply to this enquiry.
       </p>
     </form>
   );

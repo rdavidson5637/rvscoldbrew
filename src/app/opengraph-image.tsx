@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "RV's Cold Brew — Born in Belfast";
+export const alt = "RV's Cold Brew - cold brew on tap, brewed in Belfast";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,7 +28,7 @@ export default function OgImage() {
             opacity: 0.8,
           }}
         >
-          Great Northern Mall · Belfast
+          Brewed in Belfast
         </div>
         <div
           style={{
@@ -42,7 +42,7 @@ export default function OgImage() {
           RV&apos;S COLD BREW
         </div>
         <div style={{ marginTop: 32, fontSize: 36, opacity: 0.9 }}>
-          Smooth Craft Cold Brew &amp; Premium Matcha
+          Fresh cold brew on tap, without the hassle.
         </div>
         <div
           style={{
@@ -55,7 +55,7 @@ export default function OgImage() {
             alignSelf: "flex-start",
           }}
         >
-          Born in Belfast
+          Unit 11, Great Northern Mall
         </div>
       </div>
     ),

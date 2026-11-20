@@ -1,30 +1,17 @@
 import { LOCATION } from "@/lib/brand";
 
-export default function MapEmbed() {
+export default function MapEmbed({ className = "" }: { className?: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#fff2cc]/15">
+    <div
+      className={`relative min-h-[22rem] overflow-hidden border-2 border-teal bg-teal/5 ${className}`}
+    >
       <iframe
         title={`Map showing ${LOCATION.name}, Belfast`}
-        src={`https://maps.google.com/maps?q=${LOCATION.mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-        width="100%"
-        height="280"
+        src={`https://maps.google.com/maps?q=${LOCATION.mapsQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        className="block w-full border-0"
+        className="absolute inset-0 h-full w-full border-0 grayscale-[35%] sepia-[15%]"
       />
-      <div className="flex items-center justify-between gap-4 border-t border-[#fff2cc]/10 bg-[#fff2cc]/5 px-4 py-3">
-        <p className="text-xs text-[#fff2cc]/80">
-          {LOCATION.unit}, {LOCATION.name}, Belfast, near Grand Central Station
-        </p>
-        <a
-          href={LOCATION.mapsDirectionsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 text-xs font-semibold text-[#fff2cc] underline-offset-2 hover:underline"
-        >
-          Get directions →
-        </a>
-      </div>
     </div>
   );
 }

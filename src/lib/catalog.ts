@@ -13,9 +13,17 @@ import {
   hasSquareCredentials,
 } from "@/lib/square";
 
+export type CatalogItemVariation = {
+  id: string;
+  name: string;
+  priceGBP: number;
+  soldOut: boolean;
+};
+
 export type CatalogMenuItem = {
   squareId: string;
   variationId?: string;
+  variations?: CatalogItemVariation[];
   name: string;
   description?: string;
   priceGBP?: number | null;
@@ -137,24 +145,33 @@ export async function getMenu(): Promise<CatalogMenu> {
         (v): v is Square.CatalogObject.ItemVariation => v.type === "ITEM_VARIATION",
       );
 
-      const primary =
-        variations.find(
-          (v) => v.itemVariationData?.priceMoney?.amount != null,
-        ) ?? variations[0];
+      const pricedVariations: CatalogItemVariation[] = [];
+      for (const v of variations) {
+        if (!v.id) continue;
+        const p = moneyToPounds(v.itemVariationData?.priceMoney?.amount ?? null);
+        if (p == null) continue;
+        const ov = v.itemVariationData?.locationOverrides?.find(
+          (o) => o.locationId === locationId,
+        );
+        pricedVariations.push({
+          id: v.id,
+          name: v.itemVariationData?.name ?? "Regular",
+          priceGBP: p,
+          soldOut: Boolean(ov?.soldOut),
+        });
+      }
 
-      const amount = primary?.itemVariationData?.priceMoney?.amount;
-      const priceGBP = moneyToPounds(amount ?? null);
-      if (!primary?.id || priceGBP == null) {
+      const primary =
+        pricedVariations.find((v) => !v.soldOut) ?? pricedVariations[0];
+      if (!primary) {
         console.warn(
           `[catalog] Skipping item without price/variation: ${data.name ?? obj.id}`,
         );
         continue;
       }
 
-      const override = primary.itemVariationData?.locationOverrides?.find(
-        (o) => o.locationId === locationId,
-      );
-      const soldOut = Boolean(override?.soldOut);
+      const priceGBP = primary.priceGBP;
+      const soldOut = pricedVariations.every((v) => v.soldOut);
 
       const imageId = data.imageIds?.[0];
       const imageUrl = imageId ? (images.get(imageId) ?? null) : null;
@@ -166,6 +183,7 @@ export async function getMenu(): Promise<CatalogMenu> {
       const item: CatalogMenuItem = {
         squareId: obj.id,
         variationId: primary.id,
+        variations: pricedVariations.length > 1 ? pricedVariations : undefined,
         name: data.name ?? known?.name ?? "Item",
         description:
           data.descriptionPlaintext ??
