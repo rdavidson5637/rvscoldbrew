@@ -88,11 +88,11 @@ export default async function Home() {
               All the caffeine, none of the bitterness. Order ahead and collect at{" "}
               {LOCATION.unit}, {LOCATION.name}, near Grand Central Station.
             </p>
-            <div className="rise mt-8 flex flex-wrap gap-3 delay-400">
+            <div className="rise mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 delay-400">
               <Link href="/menu" className="btn-cream">
                 Order ahead
               </Link>
-              <Link href="/builder" className="btn-ghost-cream">
+              <Link href="/builder" className="link-under text-cream">
                 Find your drink
               </Link>
             </div>

@@ -10,10 +10,12 @@ export default function StickyBar() {
           href={LOCATION.mapsDirectionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 max-w-[55%] items-center truncate text-cream/80 transition-colors hover:text-cream"
+          className="inline-flex min-h-11 shrink-0 items-center text-cream/80 transition-colors hover:text-cream"
         >
-          <span className="hidden sm:inline">Collect at </span>
-          {LOCATION.unit}, {LOCATION.name}
+          <span className="sm:hidden">{LOCATION.unit}</span>
+          <span className="hidden sm:inline">
+            Collect at {LOCATION.unit}, {LOCATION.name}
+          </span>
         </a>
       </div>
     </div>
